@@ -4,3 +4,11 @@ deploy-to-github.sh
 .github/workflows/
 README.md
 .DS_Store
+# Ignore extra files
+usage-instructions.html
+
+# Keep favicons and manifests
+!favicon*.png
+!*.ico
+!apple-touch-icon.png
+!site.webmanifest
