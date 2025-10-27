@@ -1,0 +1,6 @@
+# 不需要上传的文件
+DEPLOY_INSTRUCTIONS.txt
+deploy-to-github.sh
+.github/workflows/
+README.md
+.DS_Store
