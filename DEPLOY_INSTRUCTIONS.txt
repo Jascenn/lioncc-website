@@ -1,0 +1,39 @@
+🚀 GitHub Pages 部署指令
+
+步骤 1: 创建 GitHub 仓库
+---
+访问: https://github.com/new
+- Repository name: lioncc-website
+- Description: LIONCC.AI 官方网站
+- Public
+- 不要初始化 README
+
+步骤 2: 推送到 GitHub
+---
+运行以下命令：
+
+cd /Users/jascen/Development/00_Pay_Project/lioncc.ai/optimized
+git remote add origin https://github.com/YOUR_USERNAME/lioncc-website.git
+git branch -M main
+git push -u origin main
+
+（请将 YOUR_USERNAME 替换为你的 GitHub 用户名）
+
+步骤 3: 启用 GitHub Pages
+---
+1. 打开仓库页面
+2. 点击 Settings -> Pages
+3. Source: "Deploy from a branch"
+4. Branch: main, 文件夹: / (root)
+5. Save
+
+步骤 4: 绑定自定义域名
+---
+1. 在 Pages 设置页面的 "Custom domain" 输入你的域名
+2. 点击 Save
+3. 在你的域名服务商添加 DNS 记录:
+   - 类型: CNAME
+   - 主机: @
+   - 记录值: YOUR_USERNAME.github.io
+
+完成！等待 5-10 分钟，网站即可访问。
