@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIONCC.AI - AI 编程、算力 API 与多模态内容生态</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48x48.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="images/site.webmanifest">
+    <meta name="description" content="LIONCC.AI 驱动未来 AI 基础设施与应用。提供 AI 编程算力拼车、多模型统一 API 接入、Sora 视频生成和 Gemini 多模态创作等一站式解决方案。">
+    <meta name="keywords" content="LIONCC.AI, AI 编程, 算力 API, Sora, Gemini, Claude Code, Codex, AIGC, 视频生成, 多模态, 开发者">
+    
+    <!-- Performance: Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    
+    <!-- SEO: Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lioncc.ai/">
+    <meta property="og:title" content="LIONCC.AI - AI 编程、算力 API 与多模态内容生态">
+    <meta property="og:description" content="LIONCC.AI 驱动未来 AI 基础设施与应用。提供 AI 编程算力拼车、多模型统一 API 接入、Sora 视频生成和 Gemini 多模态创作等一站式解决方案。">
+    <meta property="og:image" content="https://lioncc.ai/og-image.jpg">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    
+    <!-- SEO: Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://lioncc.ai/">
+    <meta name="twitter:title" content="LIONCC.AI - AI 编程、算力 API 与多模态内容生态">
+    <meta name="twitter:description" content="LIONCC.AI 驱动未来 AI 基础设施与应用。提供一站式 AI 解决方案。">
+    
+    <!-- SEO: Canonical and Alternate Languages -->
+    <link rel="canonical" href="https://lioncc.ai/">
+    <link rel="alternate" hreflang="zh-CN" href="https://lioncc.ai/">
+    <link rel="alternate" hreflang="en" href="https://lioncc.ai/en">
+    <link rel="alternate" hreflang="x-default" href="https://lioncc.ai/">
+    
+    <!-- SEO: Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- SEO: Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "LIONCC.AI",
+      "url": "https://lioncc.ai",
+      "logo": "https://lioncc.ai/images/logo.png",
+      "description": "LIONCC.AI 驱动未来 AI 基础设施与应用。提供 AI 编程算力拼车、多模型统一 API 接入、Sora 视频生成和 Gemini 多模态创作等一站式解决方案。",
+      "sameAs": [
+        "https://codecodex.ai",
+        "https://vibecodingapi.ai",
+        "https://www.sora2web.icu/"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Business",
+        "areaServed": "Worldwide"
+      }
+    }
+    </script>
+</head>
+<body class="antialiased">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md">跳转到主内容</a>
+
+    <!-- 导航栏 (Header) -->
+    <header class="sticky top-0 z-50 bg-white bg-opacity-95 backdrop-blur-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
+            <nav class="flex items-center justify-between" role="navigation" aria-label="主导航">
+                <!-- Logo -->
+                <a href="#" class="flex items-center" aria-label="LIONCC.AI 首页">
+                    <img src="images/banner.png" alt="LIONCC.AI" class="h-16 sm:h-20 w-auto">
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden sm:flex items-center space-x-8" id="desktop-nav-links">
+                    <a href="#products" class="nav-link text-gray-600 hover:text-gray-900 transition-colors font-medium" aria-label="查看产品" data-i18n="nav.products">产品</a>
+                    <a href="#cases" class="nav-link text-gray-600 hover:text-gray-900 transition-colors font-medium" aria-label="查看案例" data-i18n="nav.cases">案例</a>
+                    <a href="#features" class="nav-link text-gray-600 hover:text-gray-900 transition-colors font-medium" aria-label="查看优势" data-i18n="nav.features">优势</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-button" class="sm:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="打开菜单" aria-expanded="false">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-30 z-40 hidden"></div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobile-menu" class="fixed top-0 right-0 w-64 h-full bg-white shadow-2xl z-50 p-6 sm:hidden border-l border-gray-200" role="dialog" aria-modal="true" aria-label="移动端菜单">
+        <div class="flex justify-between items-center mb-8 border-b pb-4">
+            <a href="#" class="text-xl font-black text-gray-900 tracking-wider font-mono">LIONCC.AI</a>
+            <button id="close-menu-button" class="p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="关闭菜单">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-4">
+            <a href="#products" class="nav-link text-gray-700 hover:text-gray-900 font-medium text-lg" data-i18n="nav.products">产品</a>
+            <a href="#cases" class="nav-link text-gray-700 hover:text-gray-900 font-medium text-lg" data-i18n="nav.cases">案例</a>
+            <a href="#features" class="nav-link text-gray-700 hover:text-gray-900 font-medium text-lg" data-i18n="nav.features">优势</a>
+            <a href="javascript:void(0)" data-switch-lang="en" class="text-gray-700 hover:text-gray-900 font-medium text-lg">🌐 切换到英文</a>
+        </nav>
+    </div>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-bg text-center py-12 sm:py-28 md:py-40 border-b border-gray-200">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6">
+                <h1 class="text-3xl sm:text-6xl md:text-8xl font-black text-gray-900 mb-4 sm:mb-6 leading-tight px-2 sm:px-0">
+                    <span data-i18n="hero.title">新一代</span><span class="accent-color" data-i18n="hero.accent"> AI 生态</span><br><span data-i18n="hero.subtitle">驱动未来代码与算力</span>
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-12 max-w-4xl mx-auto px-2 sm:px-0" data-i18n="hero.description">
+                    为开发者、内容创作者和商业用户提供从 AI 编程算力到 Sora 视频生成的全栈 AI 基础设施。
+                </p>
+                <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 justify-center px-4 sm:px-0">
+                    <a href="#products" class="cta-button-primary inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-xl text-white font-extrabold rounded-xl hover:scale-[1.02] transition-all duration-300 min-h-[44px] sm:min-h-[56px] w-full sm:w-auto">
+                        <span data-i18n="hero.ctaPrimary">探索所有产品</span> &rarr;
+                    </a>
+                    <a href="https://vibecodingapi.ai" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 border-2 border-gray-900 text-gray-900 font-extrabold rounded-xl text-base sm:text-xl hover:bg-gray-100 transition-all duration-300 min-h-[44px] sm:min-h-[56px] w-full sm:w-auto">
+                        <span data-i18n="hero.ctaSecondary">开发者快速接入</span> →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof -->
+        <section class="py-10 sm:py-12 bg-white border-b border-gray-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-center">
+                    <div>
+                        <div class="text-3xl sm:text-5xl font-black accent-color font-mono">10,000+</div>
+                        <p class="mt-2 text-sm sm:text-base text-gray-600 font-medium font-mono" data-i18n="socialProof.developersLabel">服务全球开发者</p>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-5xl font-black accent-color font-mono">1 亿+</div>
+                        <p class="mt-2 text-sm sm:text-base text-gray-600 font-medium font-mono" data-i18n="socialProof.callsLabel">累计算力调用次数</p>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-5xl font-black accent-color font-mono">500 万+</div>
+                        <p class="mt-2 text-sm sm:text-base text-gray-600 font-medium font-mono" data-i18n="socialProof.durationLabel">AIGC 视频生成时长（秒）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase -->
+        <section id="products" class="py-12 sm:py-20 lg:py-24 bg-[#fcfcfc]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-4 text-gray-900 px-2 sm:px-0" data-i18n="products.title">我们的 AI 产品矩阵</h2>
+                <p class="text-lg sm:text-xl md:text-2xl font-medium accent-color text-center mb-2 sm:mb-6 md:mb-8 max-w-4xl mx-auto px-2 sm:px-0">
+                    <span data-i18n="products.subtitle">我们相信，未来属于连接。</span><br><br><span data-i18n="products.subtitleBreak">LIONCC.AI 将 AI 编程、算力和 AIGC 无缝整合，为您创造高效、开放、无限的 AI 工作流。</span>
+                </p>
+
+                <!-- Product Tabs -->
+                <div class="tab-container flex justify-start sm:justify-center mb-8 sm:mb-12 border-b-2 border-gray-300 overflow-x-auto whitespace-nowrap px-2 sm:px-0">
+                    <button data-category="all" class="product-tab px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-medium text-gray-600 hover:text-gray-900 transition-colors tab-active min-h-[44px] flex items-center" aria-label="显示全部产品" data-i18n="products.filterAll">全部产品</button>
+                    <button data-category="code" class="product-tab px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-medium text-gray-600 hover:text-gray-900 transition-colors min-h-[44px] flex items-center" aria-label="显示 AI 编程与协作产品" data-i18n="products.filterCode">AI 编程与协作</button>
+                    <button data-category="compute" class="product-tab px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-medium text-gray-600 hover:text-gray-900 transition-colors min-h-[44px] flex items-center" aria-label="显示多模型 API 接入产品" data-i18n="products.filterCompute">多模型 API 接入</button>
+                    <button data-category="creative" class="product-tab px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-medium text-gray-600 hover:text-gray-900 transition-colors min-h-[44px] flex items-center" aria-label="显示 AIGC 创作与工具产品" data-i18n="products.filterCreative">AIGC 创作与工具</button>
+                    <button data-category="commercial" class="product-tab px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-medium text-gray-600 hover:text-gray-900 transition-colors min-h-[44px] flex items-center" aria-label="显示自助交易与交付产品" data-i18n="products.filterCommercial">自助交易与交付</button>
+                </div>
+
+                <!-- Product Grid -->
+                <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- AI 编程算力拼车 -->
+                    <div class="product-card bg-white rounded-xl p-5 sm:p-6 md:p-8 relative" data-category="code">
+                        <div class="absolute top-0 right-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-bl-lg rounded-tr-xl">HOT</div>
+                            <svg class="w-7 h-7 sm:w-9 md:w-10 md:h-10 text-teal-500 mb-2 sm:mb-3 md:mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="AI 编程图标"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-2 md:mb-2" data-i18n="productNames.codeCarPool">AI 编程算力拼车</h3>
+                        <p class="text-sm md:text-sm product-card-description text-gray-600 mb-3 sm:mb-4 md:mb-4" data-i18n="productDescriptions.codeCarPool">官方授权，整合 Claude Code / Codex 高效算力，为团队提供稳定、高性价比的 AI 编程环境。</p>
+                        <div class="flex flex-wrap gap-2 mb-3 sm:mb-4 md:mb-6">
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.codeCollaboration">#代码协作</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.codex">#Codex</span>
+                        </div>
+                            <a href="https://codecodex.ai" target="_blank" rel="noopener noreferrer" class="accent-color font-bold hover:text-gray-800 transition-colors inline-flex items-center group text-sm md:text-base">
+                            <span data-i18n="actions.visitNow">立即访问</span> <span class="ml-1 text-lg md:text-xl transition-transform group-hover:translate-x-1">&rarr;</span>
+                        </a>
+                    </div>
+
+                    <!-- 多模型统一 API 接入 -->
+                    <div class="product-card bg-white rounded-xl p-5 sm:p-6 md:p-8" data-category="compute">
+                        <svg class="w-7 h-7 sm:w-9 md:w-10 md:h-10 text-amber-500 mb-2 sm:mb-3 md:mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="API 接入图标"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2 md:mb-2" data-i18n="productNames.api">多模型统一 API 接入</h3>
+                        <p class="text-sm md:text-sm product-card-description text-gray-600 mb-3 sm:mb-4 md:mb-4" data-i18n="productDescriptions.api">统一大模型 API 网关。一键接入 GPT、Claude、Gemini 等多模型，提供高性价比和稳定服务。</p>
+                        <div class="flex flex-wrap gap-2 mb-3 sm:mb-4">
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.api">#算力API</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.gateway">#接口网关</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
+                            <a href="https://vibecodingapi.ai" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-5 py-2.5 bg-gray-900 text-white font-bold rounded-lg text-sm md:text-base shadow-sm min-h-[44px] hover:bg-gray-800 hover:shadow-md transition-all">
+                                <span data-i18n="actions.connectApi">立即接入</span>
+                            </a>
+                            <a href="https://vibecodingapi.apifox.cn/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-5 py-2.5 border border-gray-400 text-gray-800 font-bold rounded-lg text-sm md:text-base hover:border-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all min-h-[44px]">
+                                <span data-i18n="actions.viewDocs">查看文档</span> →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Sora-2 文生视频 -->
+                    <div class="product-card bg-white rounded-xl p-5 sm:p-6 md:p-8" data-category="creative">
+                        <svg class="w-7 h-7 sm:w-9 md:w-10 md:h-10 text-pink-500 mb-2 sm:mb-3 md:mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="视频生成图标"><path d="M2 16.12l6-3.83 6 3.83 6-3.83 2 1.28V4.87a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path><path d="M22 6L12 11 2 6"></path></svg>
+                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2 md:mb-2" data-i18n="productNames.sora">Sora-2 文生视频</h3>
+                        <p class="text-sm md:text-sm product-card-description text-gray-600 mb-3 sm:mb-4 md:mb-4" data-i18n="productDescriptions.sora">领先的 AI 文生视频服务。将文字描述转化为高清、富有创意的视频内容。</p>
+                        <div class="flex flex-wrap gap-2 mb-3 sm:mb-4">
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.sora">#Sora</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.aigc">#AIGC</span>
+                        </div>
+                        <a href="https://www.sora2web.icu/" target="_blank" rel="noopener noreferrer" class="accent-color font-bold hover:text-gray-800 transition-colors inline-flex items-center group text-sm md:text-base">
+                            <span data-i18n="actions.getStarted">开始创作</span> <span class="ml-1 text-lg md:text-xl transition-transform group-hover:translate-x-1">&rarr;</span>
+                        </a>
+                    </div>
+
+                    <!-- Gemini 多模态创作 -->
+                    <div class="product-card bg-white rounded-xl p-5 sm:p-6 md:p-8" data-category="creative">
+                        <svg class="w-7 h-7 sm:w-9 md:w-10 md:h-10 text-indigo-500 mb-2 sm:mb-3 md:mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="创作工具图标"><path d="M12 2a10 10 0 0 0-9.8 12c.1.9.4 1.8.8 2.6l-1 4.3 4.3-1c.8.4 1.7.7 2.6.8A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"></path><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10z"></path></svg>
+                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2 md:mb-2" data-i18n="productNames.gemini">Gemini 多模态创作</h3>
+                        <p class="text-sm md:text-sm product-card-description text-gray-600 mb-3 sm:mb-4 md:mb-4" data-i18n="productDescriptions.gemini">基于 Gemini API。生成故事板、图像编辑、视频概念图等，加速您的视觉内容创作流程。</p>
+                        <div class="flex flex-wrap gap-2 mb-3 sm:mb-4">
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.storyboard">#故事板</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.imageEdit">#图像编辑</span>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <a href="javascript:void(0)" class="accent-color font-bold hover:text-gray-800 transition-colors inline-flex items-center group text-sm md:text-base cursor-not-allowed opacity-70">
+                                <span data-i18n="actions.comingSoon">敬请期待</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 自助下单发卡网 -->
+                    <div class="product-card bg-white rounded-xl p-5 sm:p-6 md:p-8" data-category="commercial">
+                        <svg class="w-7 h-7 sm:w-9 md:w-10 md:h-10 text-pink-500 mb-2 sm:mb-3 md:mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="购物图标"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2 md:mb-2" data-i18n="productNames.selfService">自助下单发卡网</h3>
+                        <p class="text-sm md:text-sm product-card-description text-gray-600 mb-3 sm:mb-4 md:mb-4" data-i18n="productDescriptions.selfService">自动化数字产品交易平台。7x24 小时自助购买 API 额度、软件许可证等数字产品，实现即时、安全的交易交付。</p>
+                        <div class="flex flex-wrap gap-2 mb-3 sm:mb-4">
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300">#数字商城</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300">#自动化</span>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <a href="javascript:void(0)" class="accent-color font-bold hover:text-gray-800 transition-colors inline-flex items-center group text-sm md:text-base cursor-not-allowed opacity-70">
+                                <span data-i18n="actions.goMall">前往商城 (敬请期待)</span>
+                            </a>
+                            <p class="text-xs text-gray-500" data-i18n="hints.selfService">自助交易功能开发中</p>
+                        </div>
+                    </div>
+
+                    <!-- Lioncc AI Lab -->
+                    <div class="product-card bg-gray-50 rounded-xl p-5 sm:p-6 md:p-8 border-2 border-gray-300" data-category="all">
+                        <svg class="w-7 h-7 sm:w-9 md:w-10 md:h-10 text-gray-600 mb-2 sm:mb-3 md:mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="实验室图标"><path d="M14.6 20c-.5.5-1.5 1-2.6 1s-2.1-.5-2.6-1m5.2 0H9.4m-7.1-14h19M6 8l4 4 4-4 4 4V8m-8 6v5"/></svg>
+                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2 md:mb-2" data-i18n="productNames.lab">Lioncc AI Lab</h3>
+                        <p class="text-sm md:text-sm product-card-description text-gray-600 mb-3 sm:mb-4 md:mb-4" data-i18n="productDescriptions.lab">LIONCC.AI 的前沿技术孵化器。提供 Beta 版本的 AI 衍生工具、算法和应用，邀请用户抢先体验并共同进行创新测试。</p>
+                        <div class="flex flex-wrap gap-2 mb-3 sm:mb-4">
+                            <span class="text-xs bg-gray-200 text-gray-700 px-3 py-1 rounded-full border border-gray-400" data-i18n="tags.beta">#内测</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.derivatives">#衍生工具</span>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <a href="#contacts" onclick="document.getElementById('contacts').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="accent-color font-bold hover:text-gray-800 transition-colors inline-flex items-center group text-sm md:text-base">
+                                <span data-i18n="actions.applyBeta">立即加入内测</span>
+                            </a>
+                            <p class="text-xs text-gray-600" data-i18n="hints.lab">请查看底部联系方式申请内测</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="py-12 sm:py-20 lg:py-24 bg-white border-y border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl sm:text-4xl font-bold text-center mb-8 sm:mb-16 text-gray-900" data-i18n="features.title">为什么选择 LIONCC.AI 生态？</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="feature-item bg-gray-50 p-6 sm:p-8 rounded-xl border border-gray-200">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 accent-color mb-3 sm:mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="工作流图标"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><path d="M10 6H14"></path><path d="M10 10V14"></path><path d="M14 10V14"></path><rect x="3" y="14" width="7" height="7"></rect><path d="M10 17H14"></path><path d="M17 14V10"></path></svg>
+                        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight" data-i18n="features.workflow.title">全栈 AI 工作流</h3>
+                        <p class="text-sm sm:text-base text-gray-600" data-i18n="features.workflow.description">从底层算力到上层应用，提供一站式、无缝衔接的 AI 解决方案，无需多平台切换。</p>
+                    </div>
+                    <div class="feature-item bg-gray-50 p-6 sm:p-8 rounded-xl border border-gray-200">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 accent-color mb-3 sm:mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="API 图标"><path d="M12 2L2 7l10 5 10-5L12 2z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight" data-i18n="features.api.title">开放 API 与生态互联</h3>
+                        <p class="text-sm sm:text-base text-gray-600" data-i18n="features.api.description">产品间数据互通，所有服务基于统一架构，方便您未来集成更多衍生产品与服务。</p>
+                    </div>
+                    <div class="feature-item bg-gray-50 p-6 sm:p-8 rounded-xl border border-gray-200">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 accent-color mb-3 sm:mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="安全图标"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+                        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight" data-i18n="features.security.title">企业级高可用保障</h3>
+                        <p class="text-sm sm:text-base text-gray-600" data-i18n="features.security.description">专业的底层架构保障服务高可用性与数据安全，您的数据始终受到保护。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies -->
+        <section id="cases" class="py-12 sm:py-20 lg:py-24 bg-[#fcfcfc]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl sm:text-4xl font-bold text-center mb-3 sm:mb-4 text-gray-900" data-i18n="cases.title">客户集成案例与高效工作流</h2>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 text-center mb-8 sm:mb-12 max-w-3xl mx-auto" data-i18n="cases.description">
+                    探索 LIONCC.AI 生态中不同产品如何组合，为您创造高效、开放、自动化的 AI 解决方案。
+                </p>
+                <div id="case-studies-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- JS will insert case studies here -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-10 sm:py-12 lg:py-16 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+                <div class="col-span-2 lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8 order-last lg:order-first">
+                    <div>
+                        <h4 class="text-sm sm:text-base md:text-lg font-semibold text-gray-900 mb-2 sm:mb-3 md:mb-4" data-i18n="footer.about.title">关于 LIONCC.AI</h4>
+                        <p class="text-xs sm:text-sm md:text-sm text-gray-600" data-i18n="footer.about.description">赋能下一代 AI 创新。我们致力于提供稳定、高性能的 AI 基础设施和应用服务。</p>
+                        <div class="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-200">
+                            <h5 class="text-xs sm:text-sm md:text-sm font-semibold text-gray-700 mb-2 sm:mb-3" data-i18n="footer.about.background">个人与项目背景</h5>
+                            <ul class="text-xs sm:text-sm md:text-sm text-gray-600 space-y-1.5 sm:space-y-2">
+                                <li class="flex items-start">
+                                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 mt-0.5 sm:mt-1 mr-1.5 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                    <span data-i18n="footer.about.founder">连续创业者（专注出海电商/独立站）</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 mt-0.5 sm:mt-1 mr-1.5 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                    <span data-i18n="footer.about.business">相关业务：小智机器人软硬件开发</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="contacts">
+                        <h4 class="text-sm sm:text-base md:text-lg font-semibold text-gray-900 mb-2 sm:mb-3 md:mb-4" data-i18n="footer.contact.title">商务合作</h4>
+                        <div class="flex items-start space-x-2">
+                             <svg class="w-4 h-4 sm:w-5 sm:h-5 accent-color mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                             <div>
+                                <p class="text-xs sm:text-sm text-gray-600" data-i18n="footer.contact.wechat">所罗门GPT&CC&API算力服务商：</p>
+                                <p class="font-mono text-sm sm:text-base accent-color font-bold select-all cursor-pointer">HSQBJ088888888</p>
+                                <span class="text-[10px] sm:text-xs text-gray-500" data-i18n="footer.contact.copyHint">点击号码复制</span>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 lg:col-span-1">
+                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-gray-900 mb-2 sm:mb-3 md:mb-4" data-i18n="footer.products.title">产品链接</h4>
+                    <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-sm text-gray-600">
+                        <li class="hover:text-gray-900"><a href="https://codecodex.ai" target="_blank" rel="noopener noreferrer" class="inline-flex items-center" data-i18n="footer.products.codeCarPool">AI 编程算力拼车</a></li>
+                        <li class="hover:text-gray-900"><a href="https://vibecodingapi.apifox.cn/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center" data-i18n="footer.products.api">多模型统一 API 接入</a></li>
+                        <li class="hover:text-gray-900"><a href="https://www.sora2web.icu/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center" data-i18n="footer.products.sora">Sora-2 文生视频</a></li>
+                        <li class="hover:text-gray-900"><a href="javascript:void(0)" data-i18n="footer.products.gemini">Gemini 多模态创作 (敬请期待)</a></li>
+                        <li class="hover:text-gray-900"><a href="javascript:void(0)" data-i18n="footer.products.selfService">自助交易与交付</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-1 lg:col-span-1">
+                    <h4 class="text-sm sm:text-base md:text-lg font-semibold text-gray-900 mb-2 sm:mb-3 md:mb-4" data-i18n="footer.support.title">技术与支持</h4>
+                    <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-sm text-gray-600">
+                        <li class="hover:text-gray-900"><a href="https://vibecodingapi.apifox.cn/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center" data-i18n="footer.support.devCenter">开发者中心</a></li>
+                        <li class="hover:text-gray-900"><a href="https://vibecodingapi.apifox.cn/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center" data-i18n="footer.support.apiDocs">API 文档</a></li>
+                        <li class="hover:text-gray-900"><a href="#contacts" onclick="document.getElementById('contacts').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" class="inline-flex items-center" data-i18n="footer.support.lab">Lioncc AI Lab（内测申请）</a></li>
+                    </ul>
+                    <div class="mt-3 sm:mt-4 pt-3 border-t border-gray-200">
+                        <h5 class="text-xs sm:text-sm md:text-sm font-semibold text-gray-700 mb-2 sm:mb-3" data-i18n="footer.legal.title">法律声明</h5>
+                        <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-sm text-gray-600">
+                            <li class="hover:text-gray-900"><a href="pages/privacy.html" data-i18n="footer.legal.privacy">隐私政策</a></li>
+                            <li class="hover:text-gray-900"><a href="pages/terms.html" data-i18n="footer.legal.terms">服务条款</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-6 sm:mt-8 lg:mt-12 pt-4 sm:pt-6 border-t border-gray-300">
+                <p class="text-xs sm:text-sm md:text-base text-gray-400 leading-tight" data-i18n="footer.copyright">&copy; 2025 LIONCC.AI 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+
+</body>
+</html>
+
