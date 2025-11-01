@@ -132,6 +132,7 @@ DEPLOY_INSTRUCTIONS.txt
 deploy-to-github.sh
 usage-instructions.html
 *.draft.md
+docs/
 
 # ============================================
 # 其他
@@ -165,6 +166,5 @@ usage-instructions.html
 !js/
 !images/
 !pages/
-!docs/
 !CNAME
 !README.md
