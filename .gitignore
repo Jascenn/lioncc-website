@@ -1,14 +1,170 @@
-# 不需要上传的文件
+# ============================================
+# 安全策略 - 敏感信息和密钥
+# ============================================
+# 环境变量和配置
+.env
+.env.*
+*.env
+.env.local
+.env.production
+.env.development
+
+# API 密钥和凭证
+*secret*
+*credential*
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+config.local.js
+secrets.json
+
+# ============================================
+# 系统文件 - macOS/Windows/Linux
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# ============================================
+# 编辑器和 IDE 配置
+# ============================================
+# VSCode
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*.swn
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================
+# Claude Code 配置（可能包含敏感信息）
+# ============================================
+.claude/
+.claude-code/
+
+# ============================================
+# 依赖和构建产物
+# ============================================
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm
+.yarn/
+
+# 构建输出
+dist/
+build/
+out/
+*.min.js
+*.min.css
+
+# ============================================
+# 日志和临时文件
+# ============================================
+# 日志
+*.log
+logs/
+*.log.*
+
+# 临时文件
+*.tmp
+*.temp
+*.cache
+.cache/
+tmp/
+temp/
+
+# 备份文件
+*.backup
+*.bak
+*.old
+*.orig
+
+# ============================================
+# 测试和覆盖率
+# ============================================
+coverage/
+.nyc_output/
+*.test.js
+*.spec.js
+__tests__/
+test/
+tests/
+
+# ============================================
+# 部署和文档（仅本地使用）
+# ============================================
 DEPLOY_INSTRUCTIONS.txt
 deploy-to-github.sh
-.github/workflows/
-README.md
-.DS_Store
-# Ignore extra files
 usage-instructions.html
+*.draft.md
 
-# Keep favicons and manifests
+# ============================================
+# 其他
+# ============================================
+# 压缩文件
+*.zip
+*.tar.gz
+*.rar
+
+# 数据库
+*.sqlite
+*.db
+
+# ============================================
+# 保留核心文件（白名单）
+# ============================================
+# GitHub Actions 工作流（必需）
+!.github/
+!.github/workflows/
+!.github/workflows/*.yml
+
+# Favicon 和清单文件
 !favicon*.png
 !*.ico
 !apple-touch-icon.png
 !site.webmanifest
+
+# 核心静态资源
+!index.html
+!css/
+!js/
+!images/
+!pages/
+!docs/
+!CNAME
+!README.md
