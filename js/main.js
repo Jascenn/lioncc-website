@@ -4,6 +4,7 @@ const productTagColors = {
     'Gemini 多模态创作': 'text-gray-700 bg-gray-100',
     '多模型统一 API 接入': 'text-gray-700 bg-gray-100',
     'AI 编程算力拼车': 'text-gray-700 bg-gray-100',
+    'AI 批量生图工具': 'text-gray-700 bg-gray-100',
     '自助交易与交付': 'text-gray-700 bg-gray-100',
 };
 
