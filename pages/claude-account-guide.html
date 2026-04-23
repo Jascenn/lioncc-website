@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude 订阅自动充值系统教程 - LIONCC.AI</title>
+<meta name="description" content="LIONCC.AI 站内教程：claudevip.com 的 Claude 订阅自动充值系统图文使用指南。">
+<link rel="canonical" href="https://lioncc.ai/pages/claude-account-guide.html">
+<meta property="og:url" content="https://lioncc.ai/pages/claude-account-guide.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="LIONCC.AI">
+<meta property="og:title" content="Claude 订阅自动充值系统教程 - LIONCC.AI">
+<meta property="og:description" content="LIONCC.AI 站内教程：claudevip.com 的 Claude 订阅自动充值系统图文使用指南。">
+<meta property="og:image" content="https://lioncc.ai/images/tutorials/claude-account/step-01.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Claude 订阅自动充值系统教程 - LIONCC.AI">
+<meta name="twitter:description" content="LIONCC.AI 站内教程：claudevip.com 的 Claude 订阅自动充值系统图文使用指南。">
+<meta name="twitter:image" content="https://lioncc.ai/images/tutorials/claude-account/step-01.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tutorial-guide.css">
+</head>
+<body>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+<header class="hero">
+  <div class="hero-eyebrow">LIONCC.AI · 站内教程</div>
+  <h1 class="hero-title">Claude<br><em>订阅充值</em><br>系统</h1>
+  <p class="hero-desc">通过卡密兑换与 sessionKey 验证流程，为 Claude 帐号完成订阅充值。页面提供完整的图文步骤，覆盖 F12 手动和浏览器扩展两种 Token 获取方式，适合第一次操作时对照使用。</p>
+  <div class="hero-chips">
+    <div class="hero-chip"><span class="chip-dot green"></span>10 个步骤</div>
+    <div class="hero-chip"><span class="chip-dot blue"></span>双方案可选</div>
+    <div class="hero-chip"><span class="chip-dot yellow"></span>全流程图文</div>
+  </div>
+  <div class="hero-actions">
+    <a class="hero-action primary" href="https://claudevip.com/" target="_blank" rel="noreferrer">立即前往系统</a>
+    <a class="hero-action" href="#guide-steps">查看图文步骤</a>
+    <a class="hero-action" href="#faq-guide">常见问题</a>
+  </div>
+</header>
+
+<nav class="page-nav" aria-label="页内导航">
+  <div class="page-nav-inner">
+    <a class="page-nav-link" href="#guide-steps">
+      <div class="page-nav-copy"><span class="page-nav-label">图文步骤</span><span class="page-nav-meta">逐步对照操作</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+    <a class="page-nav-link" href="#faq-guide">
+      <div class="page-nav-copy"><span class="page-nav-label">常见问题</span><span class="page-nav-meta">先看拦截点</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+    <a class="page-nav-link" href="#support-contact">
+      <div class="page-nav-copy"><span class="page-nav-label">联系支持</span><span class="page-nav-meta">微信与备用入口</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+  </div>
+</nav>
+
+<section class="resources">
+  <div class="resources-head">
+    <div class="resources-copy">
+      <div class="resources-kicker">快速入口</div>
+      <p class="resources-desc">主流程：输入卡密 → 获取 Claude sessionKey → 核对账户 → 确认充值。获取 sessionKey 有两种方式（手动 F12 / 浏览器扩展），任选一种即可。</p>
+    </div>
+  </div>
+  <div class="resources-inner">
+    <a href="https://claudevip.com/" target="_blank" class="res-card">
+      <div class="res-icon">🌐</div>
+      <div class="res-body">
+        <div class="res-title">Claude 订阅充值系统</div>
+        <div class="res-url">claudevip.com</div>
+      </div>
+      <div class="res-arrow">→</div>
+    </a>
+    <a href="https://claude.ai/" target="_blank" class="res-card">
+      <div class="res-icon">🤖</div>
+      <div class="res-body">
+        <div class="res-title">Claude 官网</div>
+        <div class="res-url">claude.ai</div>
+      </div>
+      <div class="res-arrow">→</div>
+    </a>
+    <a href="#guide-steps" class="res-card">
+      <div class="res-icon">📖</div>
+      <div class="res-body">
+        <div class="res-title">图文步骤</div>
+        <div class="res-url">10 步完整演示</div>
+      </div>
+      <div class="res-arrow">→</div>
+    </a>
+  </div>
+  <div class="resources-back">
+    <a href="../index.html#products" class="resources-back-link">← 返回 LIONCC.AI / 产品矩阵</a>
+  </div>
+</section>
+
+<section class="prep-section">
+  <div class="section-label">开始前</div>
+  <h2 class="section-title">先准备这<span>三项</span></h2>
+  <div class="prep-grid">
+    <div class="prep-card">
+      <div class="prep-step">01</div>
+      <h3>准备可用卡密</h3>
+      <p>本流程不是免费开通。需要先拿到可用的 Claude 卡密，再进入系统完成兑换。</p>
+    </div>
+    <div class="prep-card">
+      <div class="prep-step">02</div>
+      <h3>登录自己的 Claude 账号</h3>
+      <p>进入 claude.ai 并登录你要充值的 Claude 账号，后续需要从该账号提取 sessionKey。</p>
+    </div>
+    <div class="prep-card">
+      <div class="prep-step">03</div>
+      <h3>准备浏览器（推荐 Chrome）</h3>
+      <p>方案 A 需要用 F12 开发者工具；方案 B 需要安装 Chrome 扩展（Cookie Tool），二选一即可。</p>
+    </div>
+  </div>
+</section>
+
+<main class='steps-section' id='guide-steps'>
+  <div class="section-label">图文步骤</div>
+  <h2 class="section-title">完整图文<span>步骤</span></h2>
+
+  <div class="step-card reveal" data-delay="0">
+    <div class="step-num">01</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-01.jpg" alt="进入充值系统" loading="lazy"></div>
+    <div class="step-body"><h3>进入系统</h3><p>打开充值系统首页 <strong>claudevip.com</strong>。页面显示"自动化充值系统"，并按「验证卡密 → 获取充值密钥 → 确认充值 → 充值完成」四步展示流程。右上角可切换语言。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="60">
+    <div class="step-num">02</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-02.jpg" alt="输入并验证卡密" loading="lazy"></div>
+    <div class="step-body"><h3>输入并验证卡密</h3><p>在「充值卡密」输入框粘贴你的卡密，点击「立即验证」。按钮显示「验证中...」，等待几秒。注意复制时不要带空格或换行。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="120">
+    <div class="step-num">03</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-03.jpg" alt="卡密验证成功" loading="lazy"></div>
+    <div class="step-body"><h3>卡密验证成功</h3><p>页面显示「已验证卡密」+「当前卡密商品：Claude」的绿色提示，自动进入「获取 Token」步骤，下方出现方案 1（免安装插件手动获取）和方案 2（安装插件自动获取）。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="180">
+    <div class="step-num">04</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-04.jpg" alt="打开 Claude 官网" loading="lazy"></div>
+    <div class="step-body"><h3>打开 Claude 官网（claude.ai）</h3><p>新开一个标签页打开 <strong>claude.ai</strong>，登录你要充值的 Claude 账号（必须是要充值的那个账号）。后续 sessionKey 就从这个登录态中获取。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="240" style="border-left:3px solid #f59e0b;">
+    <div class="step-num">05 A</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-05a.jpg" alt="方案 A 手动 F12 获取 Token" loading="lazy"></div>
+    <div class="step-body"><h3>方案 A · 手动获取 Token（F12）</h3><p>在 claude.ai 页面按 <strong>F12</strong> 打开开发者工具 → 切到 <strong>Application</strong> 标签 → 左侧 <strong>Cookies → https://claude.ai</strong> → 找到 <code>sessionKey</code> 项，右键复制值（<code>sk-ant-sid02-...</code> 开头）→ 回到充值系统粘贴到「第二步 输入您的 Token」输入框。适合动手能力强的用户。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="300" style="border-left:3px solid #10b981;">
+    <div class="step-num">05 B-1</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-05b-1.jpg" alt="方案 B 安装浏览器扩展" loading="lazy"></div>
+    <div class="step-body"><h3>方案 B · 安装浏览器扩展（推荐新手）</h3><p>在充值系统点击「获取 Cookie 扩展」跳转到 Chrome 应用商店的 <strong>Cookie Tool</strong> 页面，点击「Add to Chrome」安装扩展。安装完成后，将扩展图标固定到浏览器工具栏。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="360" style="border-left:3px solid #10b981;">
+    <div class="step-num">05 B-2</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-05b-2.jpg" alt="扩展一键复制 Cookies" loading="lazy"></div>
+    <div class="step-body"><h3>方案 B · 一键复制 Cookies</h3><p>在已登录的 claude.ai 页面，点击浏览器工具栏上的 Cookie Tool 图标 → 点击「<strong>Get Cookies</strong>」，页面下方显示「<strong>Cookies copied to clipboard.</strong>」即代表复制成功。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="420">
+    <div class="step-num">06</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-06.jpg" alt="粘贴 Token 并点击核对账户" loading="lazy"></div>
+    <div class="step-body"><h3>粘贴 Token 并点击核对账户</h3><p>切回充值系统，将复制的 sessionKey / Cookies 粘贴到「第二步 输入您的 Token」输入框（⌘V）。粘贴完成后点击右下角「核对账户」按钮。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="480">
+    <div class="step-num">07</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-07.jpg" alt="核对用户信息" loading="lazy"></div>
+    <div class="step-body"><h3>核对用户信息</h3><p>系统弹出「用户信息」弹窗，显示从 Token 中解析到的 <strong>邮箱、姓名、组织 UUID、会员状态</strong>。核对邮箱是你要充值的账号后，点击「确认」。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="540">
+    <div class="step-num">08</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-08.jpg" alt="确认充值" loading="lazy"></div>
+    <div class="step-body"><h3>确认充值</h3><p>进入「确认充值信息」页面，显示充值卡密、预计到账时间（0-1 分钟）、KYC 提示。勾选「<strong>我确认以上信息无误，同意进行充值操作</strong>」，点击「确认充值」按钮后进入处理状态。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="600">
+    <div class="step-num">09</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-09.jpg" alt="充值成功" loading="lazy"></div>
+    <div class="step-body"><h3>充值成功</h3><p>等待进度条跑完，页面显示绿色大勾 +「<strong>充值成功！</strong>」提示，并展示充值详情（使用卡密、充值状态：成功）。</p></div>
+  </div>
+
+  <div class="step-card reveal" data-delay="660">
+    <div class="step-num">10</div>
+    <div class="step-img-wrap" onclick="openLightbox(this.querySelector('img').src)"><img src="../images/tutorials/claude-account/step-10.jpg" alt="账户验证 Max plan" loading="lazy"></div>
+    <div class="step-body"><h3>回 Claude 官网验证账户</h3><p>返回 <strong>claude.ai</strong>，刷新页面或重新登录，左下角账户信息显示「<strong>Max plan</strong>」即代表账户已成功升级。</p></div>
+  </div>
+
+  <div class="summary reveal">
+    <div class="summary-icon">✓</div>
+    <h2>充值完成</h2>
+    <p>按照上方图文步骤操作，即可完成 Claude 帐号订阅充值。如有问题，可联系 LionCC 客服获取支持。</p>
+    <div class="summary-actions">
+      <a class="summary-action primary" href="https://claudevip.com/" target="_blank" rel="noreferrer">进入系统</a>
+      <a class="summary-action" href="https://claude.ai/" target="_blank" rel="noreferrer">打开 Claude 官网</a>
+      <a class="summary-action" href="../index.html#products">返回产品矩阵</a>
+    </div>
+  </div>
+</main>
+
+<section class="faq-section" id="faq-guide">
+  <div class="section-label">常见问题</div>
+  <h2 class="section-title">操作中常见的<span>几个问题</span></h2>
+  <div class="faq-grid">
+    <div class="faq-card">
+      <h3>账户状态没更新为 Max plan</h3>
+      <p>先确认充值系统已显示「充值成功」。然后回到 claude.ai 刷新页面，必要时退出账号重新登录一次再检查。</p>
+    </div>
+    <div class="faq-card">
+      <h3>sessionKey 复制不完整</h3>
+      <p>方案 A 需要完整复制 <code>sk-ant-sid02-...</code> 这一串值，不能只截取部分。建议新手直接使用方案 B（扩展一键复制）。</p>
+    </div>
+    <div class="faq-card">
+      <h3>卡密无效或提示已使用</h3>
+      <p>优先检查复制时是否带了空格、换行或缺字。如果确认填写无误，请联系卡密来源进一步核实。</p>
+    </div>
+    <div class="faq-card">
+      <h3>两个方案我应该选哪个？</h3>
+      <p>推荐新手选方案 B（浏览器扩展），点击两下就能复制 Cookies。方案 A 需要懂 F12 开发者工具，适合动手能力强的用户。</p>
+    </div>
+  </div>
+</section>
+
+<section class='contact-section' id='support-contact'>
+  <div class='section-label'>联系支持</div>
+  <h2 class='section-title'>需要人工协助时<span>直接联系</span></h2>
+  <div class='contact-grid'>
+    <div class='contact-card primary reveal'>
+      <div class='contact-kicker'>微信客服</div>
+      <h3>HSQBJ088888888</h3>
+      <p class='contact-copy'>所罗门GPT&CC&API算力服务商</p>
+      <p>添加时注明"Claude 订阅充值系统"，方便快速定位你当前遇到的是卡密、登录还是兑换结果问题。</p>
+      <div class='contact-actions'>
+        <button class='contact-action primary' type='button' data-copy-text='HSQBJ088888888'>复制微信号</button>
+        <a class='contact-action' href='https://claudevip.com/' target='_blank' rel='noreferrer'>进入系统</a>
+      </div>
+    </div>
+    <div class='contact-card reveal'>
+      <div class='contact-kicker'>备用入口</div>
+      <ul class='contact-list'>
+        <li>
+          <div>
+            <strong>Claude 官网</strong>
+            <span>充值完成后直接前往 claude.ai 验证账户状态。</span>
+          </div>
+          <a class='contact-link' href='https://claude.ai/' target='_blank' rel='noreferrer'>打开 claude.ai →</a>
+        </li>
+        <li>
+          <div>
+            <strong>LIONCC.AI 产品矩阵</strong>
+            <span>看完教程后返回首页，继续访问其他产品或切换到 ChatGPT 自助订阅入口。</span>
+          </div>
+          <a class='contact-link' href='../index.html#products'>返回首页 →</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-close" onclick="closeLightbox()">✕</div>
+</div>
+<script src="../js/tutorial-guide.js"></script>
+</body>
+</html>
