@@ -178,21 +178,158 @@ python3 -m http.server 8000
 
 ```
 lioncc-website/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          # 自动部署配置
+├── .github/workflows/deploy.yml        # 自动部署到 gh-pages
+├── .githooks/pre-commit                # 自动 build hook（需 git config 启用）
+├── src/tailwind-input.css              # Tailwind 入口
+├── tailwind.config.js                  # Tailwind 扫描配置
+├── package.json + bun.lock             # Bun 依赖
+│
+├── index.html                          # 首页（Tailwind 系）
+├── 404.html                            # 404 页（独立无依赖）
+├── sitemap.xml + robots.txt            # SEO 三件套
+├── og-image.jpg                        # 社交分享预览图（1200×630）
+├── CNAME                               # 自定义域名
+│
+├── pages/
+│   ├── terms.html / privacy.html       # 法务页（Tailwind 系）
+│   └── *-guide.html                    # 教程页（Tutorial 系，独立 CSS）
+│
 ├── css/
-│   └── styles.css              # 样式文件
+│   ├── tailwind.css                    # ⚠️ build 产物，pre-commit hook 自动维护
+│   ├── styles.css                      # 自定义全局样式
+│   └── tutorial-guide.css              # 教程页专用 CSS（手写，不依赖 Tailwind）
+│
 ├── js/
-│   └── main.js                 # JavaScript 文件
-├── images/                     # 图片资源
-├── pages/                      # 其他页面
-├── index.html                  # 首页
-├── CNAME                       # 域名配置
-└── README.md                   # 项目说明
+│   ├── main.js / subscription-modal.js # 首页交互（Tailwind 系扫描）
+│   └── tutorial-guide.js               # 教程页交互
+│
+├── images/  + videos/                  # 静态资源
+└── README.md / DEPLOYMENT.md
 ```
 
+---
+
+## 架构总览：两套独立子系统
+
+仓库实际上分两套互不影响的页面族群，理解这点能避免改错文件：
+
+| 子系统 | 页面 | CSS | JS | 是否需要 Tailwind build |
+|---|---|---|---|---|
+| **Tailwind 系** | `index.html` / `pages/terms.html` / `pages/privacy.html` | `tailwind.css` + `styles.css` | `main.js` + `subscription-modal.js` | **是** |
+| **Tutorial 系** | `pages/*-guide.html`（claude / chatgpt-plus / gptplus-free） | `tutorial-guide.css`（手写）| `tutorial-guide.js` | **否** |
+
+> 加新教程页：复制现有 `*-guide.html` 模板即可，不需要 build。
+> 改首页 / 法务页 / 订阅弹窗：触发 build（pre-commit hook 自动处理）。
+
+---
+
+## Tailwind 构建系统
+
+### 为什么要 build
+
+Tailwind 不是预生成所有 CSS，而是**按需生成**——扫描 HTML/JS 里实际用到的 class，只输出这些规则。
+- 之前用 `cdn.tailwindcss.com`：用户浏览器**每次访问**都要下载 407 KB 脚本并实时扫描 DOM 生成 CSS
+- 现在用本地 build：你这台电脑**一次性**扫描生成 23 KB CSS，所有用户直接用
+
+### 何时需要 build
+
+| 改了什么 | 需要 build？ |
+|---|---|
+| `index.html` / `pages/terms.html` / `pages/privacy.html` 新增 Tailwind class | ✅ |
+| `js/main.js` / `js/subscription-modal.js` 新增 Tailwind class | ✅ |
+| 改 HTML 文字内容（不动 class）| ❌ |
+| 改 `pages/*-guide.html`（Tutorial 系）| ❌ |
+| 改 `css/styles.css` / `css/tutorial-guide.css` | ❌ |
+
+### 如何 build（三种方式）
+
+```bash
+# 1. 自动（推荐）—— pre-commit hook 检测到触发文件后自动执行
+git commit -m "..."   # hook 自动跑 build 并 stage css/tailwind.css
+
+# 2. 手动一次性
+bun run build         # 等价于：bunx tailwindcss -i src/tailwind-input.css -o css/tailwind.css --minify
+
+# 3. 监听模式（本地反复调试时）
+bun run dev           # 文件改变时自动重 build
+```
+
+### pre-commit hook
+
+位置：`.githooks/pre-commit`（git tracked，所有人共享）。
+逻辑：`git commit` 时检查暂存区，若改了 Tailwind 触发文件（`index.html` / `terms/privacy.html` / `main.js` / `subscription-modal.js` / `src/tailwind-input.css` / `tailwind.config.js`），自动 `bun run build` 并把 `css/tailwind.css` 加入本次 commit。
+
+### 首次 clone 后必做
+
+```bash
+bun install                           # 装依赖
+git config core.hooksPath .githooks   # 启用自动 build hook
+```
+
+---
+
+## SEO 资源
+
+| 文件 | 作用 |
+|---|---|
+| `sitemap.xml` | 列出 6 个 URL 给搜索引擎抓取 |
+| `robots.txt` | 允许全部抓取 + 声明 sitemap |
+| `404.html` | 自定义 404 页（GitHub Pages 自动接管，无外部依赖）|
+| `og-image.jpg` | 1200×630 社交分享卡片图（微信/Twitter 等链接预览）|
+
+后续维护：
+- 加新页面 → 在 `sitemap.xml` 里追加一条 `<url>`
+- 换 OG 图 → 直接替换 `og-image.jpg`，保持 1200×630
+
+---
+
+## 回滚操作
+
+线上出问题时按以下步骤操作。**永远不要 force push 到 main**。
+
+### 方式 1：回滚到上一个稳定版本（推荐）
+
+```bash
+# 1. 找到要撤销的 merge commit hash
+git log --oneline --merges -5
+
+# 2. 用 revert 安全撤销（保留历史）
+git revert -m 1 <merge-commit-hash>
+git push
+```
+
+GitHub Actions 1-2 分钟后自动重新部署到上一个状态。
+
+### 方式 2：回滚单个文件
+
+```bash
+# 把某个文件恢复到指定 commit 的版本
+git checkout <commit-hash> -- pages/some-file.html
+git commit -m "fix: rollback some-file.html to <hash>"
+git push
+```
+
+### 关键里程碑（保险用）
+
+| 时间 | Commit | 描述 |
+|---|---|---|
+| 2026-04-26 | `497a108` | SEO baseline + cleanup 完成 |
+| 2026-04-26 | `22a7a53` | Tailwind CDN 切换为本地 build |
+
+---
+
 ## 最近更新
+
+### 2026-04-26
+- ✅ Claude 订阅充值教程页上线（含视频段，3 分 38 秒演示）
+- ✅ 教程页对齐 ChatGPT Plus 模板（飞书图文文档入口、summary 按钮等）
+- ✅ SEO 三件套：sitemap.xml / robots.txt / 404.html / og-image.jpg
+- ✅ 删除无效 hreflang `/en` 和 `og:locale:alternate=en_US`
+- ✅ 压缩 step-05a.jpg（626KB → 440KB）
+- ✅ Claude 教程页 inline style 抽到 CSS（`.step-card--scheme-a/b`）
+- ✅ Tailwind CDN 切换为本地 build（407KB → 23KB，-94%）
+- ✅ 修复 terms/privacy 的 `css/styles.css` 路径 bug（应为 `../css/styles.css`）
+- ✅ 引入 Bun + pre-commit hook 自动构建链
 
 ### 2024-12-04
 - ✅ 添加 AI 批量生图工具产品卡片
@@ -209,4 +346,4 @@ lioncc-website/
 
 ---
 
-📝 文档更新日期：2024-12-04
+📝 文档更新日期：2026-04-26
