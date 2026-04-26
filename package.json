@@ -1,0 +1,11 @@
+{
+  "name": "lioncc-website",
+  "private": true,
+  "scripts": {
+    "build": "bunx tailwindcss -i src/tailwind-input.css -o css/tailwind.css --minify",
+    "dev": "bunx tailwindcss -i src/tailwind-input.css -o css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3"
+  }
+}

@@ -18,8 +18,7 @@
     <!-- Performance: Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    
+
     <!-- SEO: Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lioncc.ai/">
@@ -43,9 +42,10 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
     
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    <!-- Load Tailwind CSS (production build, replaces cdn.tailwindcss.com) -->
+    <link rel="preload" href="css/tailwind.css" as="style">
+    <link rel="stylesheet" href="css/tailwind.css">
+
     <!-- Custom Styles -->
     <link rel="preload" href="css/styles.css" as="style">
     <link rel="stylesheet" href="css/styles.css">
