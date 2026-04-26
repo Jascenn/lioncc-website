@@ -1,0 +1,23 @@
+#!/bin/sh
+# 自动检测 Tailwind 系文件变更 → 自动跑 build → 自动 stage css/tailwind.css
+# 配套位置：tailwind.config.js content 字段（必须保持同步）
+
+TRIGGER='^(index\.html|pages/(terms|privacy)\.html|js/(main|subscription-modal)\.js|src/tailwind-input\.css|tailwind\.config\.js)$'
+
+CHANGED=$(git diff --cached --name-only --diff-filter=ACMR | grep -E "$TRIGGER")
+
+if [ -z "$CHANGED" ]; then
+  exit 0
+fi
+
+echo "🔨 检测到 Tailwind 触发文件改动，自动 build 中..."
+echo "$CHANGED" | sed 's/^/   - /'
+
+if ! bun run build; then
+  echo "❌ Tailwind build 失败，commit 中止"
+  exit 1
+fi
+
+git add css/tailwind.css
+echo "✅ css/tailwind.css 已自动更新并加入本次 commit"
+exit 0
