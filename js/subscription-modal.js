@@ -1,30 +1,32 @@
+// 订阅弹窗：内容用 data-i18n 标记，由全局 i18n.js 接管翻译；
+// 切换语言时由 i18n.js 的 applyTranslations() 自动覆盖弹窗内文字，无需重渲染。
 const subscriptionOptions = [
 	{
 		accent: 'gray',
-		eyebrow: '帐号充值',
-		title: 'ChatGPT 帐号充值系统',
+		eyebrowKey: 'subscription.gptplus.eyebrow',
+		titleKey: 'subscription.gptplus.title',
 		domain: 'gptplus.free',
-		description: '适合用于 ChatGPT Plus 会员充值。当前入口对应独立域名、独立卡密格式和独立教程。',
-		tags: ['#独立后台', '#教程'],
+		descriptionKey: 'subscription.entryDescription',
+		tagKeys: ['tags.independentBackend', 'tags.tutorial'],
 		facts: [
-			['适用场景', 'ChatGPT Plus 会员充值'],
-			['卡密示例', '17ED****-****-****-****-********3CC8'],
-			['三步流程', '输入卡密 → 获取 GPT 登录 Token → 充值成功'],
+			{ labelKey: 'subscription.factScenario', valueKey: 'subscription.scenarioPlus' },
+			{ labelKey: 'subscription.factCardSample', valueRaw: '17ED****-****-****-****-********3CC8' },
+			{ labelKey: 'subscription.factThreeSteps', valueKey: 'chatgpt.steps' },
 		],
 		primaryHref: 'https://gptplus.free',
 		secondaryHref: 'pages/gptplus-free-guide.html',
 	},
 	{
 		accent: 'emerald',
-		eyebrow: 'Plus 订阅',
-		title: 'ChatGPT Plus 帐号充值系统',
+		eyebrowKey: 'subscription.chatgptplus.eyebrow',
+		titleKey: 'subscription.chatgptplus.title',
 		domain: 'chatgptplus.club',
-		description: '适合用于 ChatGPT Plus 会员充值。当前入口对应独立域名、独立卡密格式和独立教程。',
-		tags: ['#独立后台', '#教程'],
+		descriptionKey: 'subscription.entryDescription',
+		tagKeys: ['tags.independentBackend', 'tags.tutorial'],
 		facts: [
-			['适用场景', 'ChatGPT Plus 会员充值'],
-			['卡密示例', 'Y2DD****O7Y8****'],
-			['三步流程', '输入卡密 → 获取 GPT 登录 Token → 充值成功'],
+			{ labelKey: 'subscription.factScenario', valueKey: 'subscription.scenarioPlus' },
+			{ labelKey: 'subscription.factCardSample', valueRaw: 'Y2DD****O7Y8****' },
+			{ labelKey: 'subscription.factThreeSteps', valueKey: 'chatgpt.steps' },
 		],
 		primaryHref: 'https://chatgptplus.club',
 		secondaryHref: 'pages/chatgpt-plus-guide.html',
@@ -52,30 +54,34 @@ const renderSubscriptionCard = (option) => {
 			secondary: 'border-gray-300 bg-white text-gray-800 hover:border-gray-400',
 		};
 
-	const tags = option.tags
-		.map((tag) => `<span class="rounded-full border ${theme.tag} bg-white px-3 py-1 text-xs">${tag}</span>`)
+	const tags = option.tagKeys
+		.map((key) => `<span class="rounded-full border ${theme.tag} bg-white px-3 py-1 text-xs" data-i18n="${key}"></span>`)
 		.join('');
 
 	const facts = option.facts
-		.map(([label, value], index) => `
-			<div class="grid grid-cols-[84px,1fr] gap-3 px-4 py-3 ${index ? 'border-t border-black/5' : ''}">
-				<div class="text-[11px] font-semibold uppercase tracking-[0.18em] ${theme.factLabel}">${label}</div>
-				<div class="text-sm leading-6 text-gray-700">${value}</div>
-			</div>`)
+		.map((fact, index) => {
+			const valueAttr = fact.valueKey ? ` data-i18n="${fact.valueKey}"` : '';
+			const valueText = fact.valueRaw || '';
+			return `
+				<div class="grid grid-cols-[84px,1fr] gap-3 px-4 py-3 ${index ? 'border-t border-black/5' : ''}">
+					<div class="text-[11px] font-semibold uppercase tracking-[0.18em] ${theme.factLabel}" data-i18n="${fact.labelKey}"></div>
+					<div class="text-sm leading-6 text-gray-700"${valueAttr}>${valueText}</div>
+				</div>`;
+		})
 		.join('');
 
 	return `
 		<article class="rounded-2xl border ${theme.card} p-5 sm:p-6">
-			<p class="text-xs font-semibold uppercase tracking-[0.24em] ${theme.eyebrow}">${option.eyebrow}</p>
-			<h4 class="mt-3 text-2xl font-bold text-gray-900">${option.title}</h4>
+			<p class="text-xs font-semibold uppercase tracking-[0.24em] ${theme.eyebrow}" data-i18n="${option.eyebrowKey}"></p>
+			<h4 class="mt-3 text-2xl font-bold text-gray-900" data-i18n="${option.titleKey}"></h4>
 			<p class="mt-3 break-all text-sm font-mono text-gray-500">${option.domain}</p>
-			<p class="mt-4 text-sm leading-6 text-gray-600">${option.description}</p>
+			<p class="mt-4 text-sm leading-6 text-gray-600" data-i18n="${option.descriptionKey}"></p>
 			<div class="mt-4 flex flex-wrap gap-2">${tags}</div>
 			<div class="mt-5 overflow-hidden rounded-2xl border ${theme.facts}">${facts}
 			</div>
 			<div class="mt-6 flex flex-col gap-3">
-				<a href="${option.primaryHref}" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center justify-center rounded-lg px-5 py-2.5 text-sm font-bold transition-all ${theme.primary}">进入系统</a>
-				<a href="${option.secondaryHref}" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border px-5 py-2.5 text-sm font-bold transition-all ${theme.secondary}">站内教程</a>
+				<a href="${option.primaryHref}" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center justify-center rounded-lg px-5 py-2.5 text-sm font-bold transition-all ${theme.primary}" data-i18n="actions.enterSystem"></a>
+				<a href="${option.secondaryHref}" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border px-5 py-2.5 text-sm font-bold transition-all ${theme.secondary}" data-i18n="subscription.inSiteTutorial"></a>
 			</div>
 		</article>`;
 };
@@ -92,11 +98,11 @@ const initSubscriptionModal = () => {
 					<div data-subscription-modal-panel class="relative w-full max-w-5xl overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-2xl">
 						<div class="flex items-start justify-between gap-4 border-b border-gray-200 px-5 py-5 sm:px-8">
 							<div>
-								<p class="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-600">自助订阅</p>
-								<h3 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl">选择产品入口</h3>
-								<p class="mt-2 max-w-2xl text-sm leading-6 text-gray-600">两个产品分别对应独立域名、兑换系统和教程。先看适用场景与兑换方式，再进入对应系统。</p>
+								<p class="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-600" data-i18n="subscription.modal.eyebrow"></p>
+								<h3 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl" data-i18n="subscription.modal.title"></h3>
+								<p class="mt-2 max-w-2xl text-sm leading-6 text-gray-600" data-i18n="subscription.modal.description"></p>
 							</div>
-							<button type="button" data-close-subscription-modal class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition-colors hover:border-gray-300 hover:text-gray-900" aria-label="关闭弹窗">
+							<button type="button" data-close-subscription-modal class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition-colors hover:border-gray-300 hover:text-gray-900" data-i18n-aria-label="subscription.modal.closeAria">
 								<span class="text-2xl leading-none">&times;</span>
 							</button>
 						</div>
@@ -107,10 +113,20 @@ const initSubscriptionModal = () => {
 				</div>
 			</div>`;
 
+		// 立刻翻译刚插入 DOM 的弹窗内容（原本只在页面加载时翻译过一次，此时弹窗还不存在）
+		if (window.i18n && window.i18n.apply) {
+			window.i18n.apply(root);
+			// aria-label 需要用 setAttribute，不在 textContent 替换的范围内
+			root.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+				const key = el.getAttribute('data-i18n-aria-label');
+				const val = window.i18n.t(key);
+				if (val && val !== key) el.setAttribute('aria-label', val);
+			});
+		}
+
 		const modal = document.getElementById('subscription-modal');
 		const triggers = document.querySelectorAll('[data-open-subscription-modal]');
 		const closers = root.querySelectorAll('[data-close-subscription-modal]');
-		const frame = root.querySelector('[data-subscription-modal-frame]');
 		const panel = root.querySelector('[data-subscription-modal-panel]');
 		const menuOverlay = document.getElementById('mobile-menu-overlay');
 		if (!modal) return;
@@ -158,9 +174,27 @@ const initSubscriptionModal = () => {
 		document.addEventListener('keydown', (event) => {
 			if (event.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
 		});
+
+		// 切换语言后同步 close 按钮的 aria-label（applyTranslations 只改 textContent）
+		document.addEventListener('i18n:changed', () => {
+			root.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+				const key = el.getAttribute('data-i18n-aria-label');
+				const val = window.i18n.t(key);
+				if (val && val !== key) el.setAttribute('aria-label', val);
+			});
+		});
 	} catch (error) {
 		console.error('Error initializing subscription modal:', error);
 	}
 };
 
-document.addEventListener('DOMContentLoaded', initSubscriptionModal);
+// 等 i18n 字典就绪后再 mount，避免英文用户首屏看到中文 modal 的闪烁
+function mountSubscriptionModalWhenReady() {
+	if (window.i18n && window.i18n.ready) {
+		initSubscriptionModal();
+	} else {
+		document.addEventListener('i18n:ready', initSubscriptionModal, { once: true });
+	}
+}
+
+document.addEventListener('DOMContentLoaded', mountSubscriptionModalWhenReady);
