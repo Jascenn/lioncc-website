@@ -36,6 +36,7 @@
     <!-- SEO: Canonical and Alternate Languages -->
     <link rel="canonical" href="https://lioncc.ai/">
     <link rel="alternate" hreflang="zh-CN" href="https://lioncc.ai/">
+    <link rel="alternate" hreflang="en" href="https://lioncc.ai/?lang=en">
     <link rel="alternate" hreflang="x-default" href="https://lioncc.ai/">
     
     <!-- SEO: Robots -->
@@ -90,6 +91,7 @@
                     <a href="#products" class="nav-link text-gray-600 hover:text-gray-900 transition-colors font-medium" aria-label="查看产品" data-i18n="nav.products">产品</a>
                     <a href="#cases" class="nav-link text-gray-600 hover:text-gray-900 transition-colors font-medium" aria-label="查看案例" data-i18n="nav.cases">案例</a>
                     <a href="#features" class="nav-link text-gray-600 hover:text-gray-900 transition-colors font-medium" aria-label="查看优势" data-i18n="nav.features">优势</a>
+                    <button type="button" data-lang-switcher class="text-gray-600 hover:text-gray-900 transition-colors font-medium px-3 py-1 rounded border border-gray-300 hover:border-gray-500 text-sm" aria-label="Switch language">EN</button>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -119,7 +121,7 @@
             <a href="#products" class="nav-link text-gray-700 hover:text-gray-900 font-medium text-lg" data-i18n="nav.products">产品</a>
             <a href="#cases" class="nav-link text-gray-700 hover:text-gray-900 font-medium text-lg" data-i18n="nav.cases">案例</a>
             <a href="#features" class="nav-link text-gray-700 hover:text-gray-900 font-medium text-lg" data-i18n="nav.features">优势</a>
-            <a href="javascript:void(0)" data-switch-lang="en" class="text-gray-700 hover:text-gray-900 font-medium text-lg">🌐 切换到英文</a>
+            <button type="button" data-lang-switcher class="text-left text-gray-700 hover:text-gray-900 font-medium text-lg" aria-label="Switch language">EN</button>
         </nav>
     </div>
 
@@ -474,6 +476,7 @@
 
     <div id="subscription-modal-root"></div>
 
+    <script src="js/i18n.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/subscription-modal.js" defer></script>
 
