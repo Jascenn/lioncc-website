@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIONCC.AI - AI 编程、算力 API 与多模态内容生态</title>
+    <title data-i18n="meta.title">LIONCC.AI - AI 编程、算力 API 与多模态内容生态</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
@@ -75,7 +75,7 @@
 </head>
 <body class="antialiased">
     <!-- Skip to main content link for accessibility -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md">跳转到主内容</a>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md" data-i18n="accessibility.skipToMain">跳转到主内容</a>
 
     <!-- 导航栏 (Header) -->
     <header class="sticky top-0 z-50 bg-white bg-opacity-95 backdrop-blur-sm border-b border-gray-200">
@@ -155,11 +155,11 @@
                         <p class="mt-2 text-sm sm:text-base text-gray-600 font-medium font-mono" data-i18n="socialProof.developersLabel">服务全球开发者</p>
                     </div>
                     <div>
-                        <div class="text-3xl sm:text-5xl font-black accent-color font-mono">1 亿+</div>
+                        <div class="text-3xl sm:text-5xl font-black accent-color font-mono" data-i18n="socialProof.callsValue">1 亿+</div>
                         <p class="mt-2 text-sm sm:text-base text-gray-600 font-medium font-mono" data-i18n="socialProof.callsLabel">累计算力调用次数</p>
                     </div>
                     <div>
-                        <div class="text-3xl sm:text-5xl font-black accent-color font-mono">500 万+</div>
+                        <div class="text-3xl sm:text-5xl font-black accent-color font-mono" data-i18n="socialProof.durationValue">500 万+</div>
                         <p class="mt-2 text-sm sm:text-base text-gray-600 font-medium font-mono" data-i18n="socialProof.durationLabel">AIGC 视频生成时长（秒）</p>
                     </div>
                 </div>
@@ -225,8 +225,8 @@
                         <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2 md:mb-2" data-i18n="productNames.selfService">自助下单发卡网</h3>
                         <p class="text-sm md:text-sm product-card-description text-gray-600 mb-3 sm:mb-4 md:mb-4" data-i18n="productDescriptions.selfService">自动化数字产品交易平台。7x24 小时自助购买 API 额度、软件许可证等数字产品，实现即时、安全的交易交付。</p>
                         <div class="flex flex-wrap gap-2 mb-3 sm:mb-4">
-                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300">#数字商城</span>
-                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300">#自动化</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.digitalMall">#数字商城</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.automation">#自动化</span>
                         </div>
                         <a href="https://aigcpro.shop/" target="_blank" rel="noopener noreferrer" class="accent-color font-bold hover:text-gray-800 transition-colors inline-flex items-center group text-sm md:text-base">
                             <span data-i18n="actions.goMall">前往商城</span> <span class="ml-1 text-lg md:text-xl transition-transform group-hover:translate-x-1">&rarr;</span>
@@ -237,23 +237,23 @@
                     <div class="product-card bg-white rounded-xl border border-emerald-100 p-5 shadow-sm shadow-emerald-50/70 sm:p-6 md:p-8 cursor-pointer" data-category="commercial" data-open-subscription-modal role="button" tabindex="0" aria-haspopup="dialog" aria-controls="subscription-modal">
                         <div class="mb-2 flex items-center justify-between gap-3 sm:mb-3 md:mb-4">
                             <svg class="h-7 w-7 text-emerald-500 sm:w-9 md:h-10 md:w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="ChatGPT 订阅图标"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4z"></path><path d="M8 9h8"></path><path d="M8 12h8"></path><path d="M8 15h5"></path></svg>
-                            <span class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-emerald-700">双系统</span>
+                            <span class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-emerald-700" data-i18n="chatgpt.dualSystemBadge">双系统</span>
                         </div>
-                        <h3 class="mb-1.5 text-lg font-bold text-gray-900 sm:mb-2 sm:text-xl md:mb-2 md:text-2xl">ChatGPT 自助订阅</h3>
-                        <p class="product-card-description mb-3 text-sm text-gray-600 sm:mb-4 md:mb-4 md:text-sm">聚合两个独立入口，均用于 ChatGPT Plus 会员充值。两者主要区别是访问域名和卡密格式不同，后台与教程分别承接。</p>
+                        <h3 class="mb-1.5 text-lg font-bold text-gray-900 sm:mb-2 sm:text-xl md:mb-2 md:text-2xl" data-i18n="productNames.chatgptSub">ChatGPT 自助订阅</h3>
+                        <p class="product-card-description mb-3 text-sm text-gray-600 sm:mb-4 md:mb-4 md:text-sm" data-i18n="productDescriptions.chatgptSub">聚合两个独立入口，均用于 ChatGPT Plus 会员充值。两者主要区别是访问域名和卡密格式不同，后台与教程分别承接。</p>
                         <div class="mb-3 flex flex-wrap gap-2 sm:mb-4">
-                            <span class="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs text-emerald-700">#双系统</span>
-                            <span class="rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-xs text-gray-600">#独立后台</span>
-                            <span class="rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-xs text-gray-600">#卡密格式不同</span>
+                            <span class="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs text-emerald-700" data-i18n="tags.dualSystem">#双系统</span>
+                            <span class="rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-xs text-gray-600" data-i18n="tags.independentBackend">#独立后台</span>
+                            <span class="rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-xs text-gray-600" data-i18n="tags.differentCardFormat">#卡密格式不同</span>
                         </div>
                         <div class="mb-2 flex flex-wrap gap-2 sm:mb-3">
                             <a href="https://gptplus.free" target="_blank" rel="noopener noreferrer" data-direct-subscription-link class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-mono text-gray-500 transition-colors hover:border-gray-300 hover:text-gray-900">gptplus.free</a>
                             <a href="https://chatgptplus.club" target="_blank" rel="noopener noreferrer" data-direct-subscription-link class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-mono text-gray-500 transition-colors hover:border-gray-300 hover:text-gray-900">chatgptplus.club</a>
                         </div>
-                        <div class="space-y-2 text-xs text-gray-500"><p>点击域名可直接进入，点击按钮可查看两个入口的差异与教程。</p><p><span class="font-medium text-gray-700">三步完成：</span>输入卡密 → 获取 GPT 登录 Token → 充值成功</p></div>
+                        <div class="space-y-2 text-xs text-gray-500"><p data-i18n="chatgpt.hint">点击域名可直接进入，点击按钮可查看两个入口的差异与教程。</p><p><span class="font-medium text-gray-700" data-i18n="subscription.threeStepsLabel">三步完成：</span><span data-i18n="chatgpt.steps">输入卡密 → 获取 GPT 登录 Token → 充值成功</span></p></div>
                         <div class="mt-4">
                             <button type="button" class="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-gray-800 hover:shadow-md md:text-base">
-                                <span>选择系统入口</span>
+                                <span data-i18n="actions.selectEntry">选择系统入口</span>
                             </button>
                         </div>
                     </div>
@@ -262,22 +262,22 @@
                     <div class="product-card bg-white rounded-xl border border-orange-100 p-5 shadow-sm shadow-orange-50/70 sm:p-6 md:p-8" data-category="commercial">
                         <div class="mb-2 flex items-center justify-between gap-3 sm:mb-3 md:mb-4">
                             <svg class="h-7 w-7 text-orange-500 sm:w-9 md:h-10 md:w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Claude 订阅充值图标"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"></path></svg>
-                            <span class="inline-flex items-center rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-orange-700">自动充值</span>
+                            <span class="inline-flex items-center rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-orange-700" data-i18n="claude.autoRechargeBadge">自动充值</span>
                         </div>
-                        <h3 class="mb-1.5 text-lg font-bold text-gray-900 sm:mb-2 sm:text-xl md:mb-2 md:text-2xl">Claude 订阅自动充值系统</h3>
-                        <p class="product-card-description mb-3 text-sm text-gray-600 sm:mb-4 md:mb-4 md:text-sm">面向 Claude 订阅的自助充值入口。输入卡密并获取 sessionKey，即可完成 Claude 订阅的自动充值，流程与 ChatGPT 系统一致。</p>
+                        <h3 class="mb-1.5 text-lg font-bold text-gray-900 sm:mb-2 sm:text-xl md:mb-2 md:text-2xl" data-i18n="productNames.claudeSub">Claude 订阅自动充值系统</h3>
+                        <p class="product-card-description mb-3 text-sm text-gray-600 sm:mb-4 md:mb-4 md:text-sm" data-i18n="productDescriptions.claudeSub">面向 Claude 订阅的自助充值入口。输入卡密并获取 sessionKey，即可完成 Claude 订阅的自动充值，流程与 ChatGPT 系统一致。</p>
                         <div class="mb-3 flex flex-wrap gap-2 sm:mb-4">
-                            <span class="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs text-orange-700">#自动充值</span>
-                            <span class="rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-xs text-gray-600">#独立后台</span>
-                            <span class="rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-xs text-gray-600">#教程</span>
+                            <span class="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs text-orange-700" data-i18n="tags.autoRecharge">#自动充值</span>
+                            <span class="rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-xs text-gray-600" data-i18n="tags.independentBackend">#独立后台</span>
+                            <span class="rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-xs text-gray-600" data-i18n="tags.tutorial">#教程</span>
                         </div>
                         <div class="mb-2 flex flex-wrap gap-2 sm:mb-3">
                             <a href="https://claudevip.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-mono text-gray-500 transition-colors hover:border-gray-300 hover:text-gray-900">claudevip.com</a>
                         </div>
-                        <div class="space-y-2 text-xs text-gray-500"><p>点击域名可直接进入系统，或通过下方按钮查看图文教程。</p><p><span class="font-medium text-gray-700">三步完成：</span>输入卡密 → 获取 Claude sessionKey → 充值成功</p></div>
+                        <div class="space-y-2 text-xs text-gray-500"><p data-i18n="claude.hint">点击域名可直接进入系统，或通过下方按钮查看图文教程。</p><p><span class="font-medium text-gray-700" data-i18n="subscription.threeStepsLabel">三步完成：</span><span data-i18n="claude.steps">输入卡密 → 获取 Claude sessionKey → 充值成功</span></p></div>
                         <div class="mt-4 flex flex-wrap gap-3">
-                            <a href="https://claudevip.com" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-gray-800 hover:shadow-md md:text-base">进入系统</a>
-                            <a href="pages/claude-account-guide.html" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-bold text-gray-800 transition-all hover:border-gray-400 md:text-base">查看教程</a>
+                            <a href="https://claudevip.com" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-gray-800 hover:shadow-md md:text-base" data-i18n="actions.enterSystem">进入系统</a>
+                            <a href="pages/claude-account-guide.html" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-bold text-gray-800 transition-all hover:border-gray-400 md:text-base" data-i18n="actions.viewTutorial">查看教程</a>
                         </div>
                     </div>
 
@@ -312,20 +312,20 @@
                     <!-- LionKit 创作工坊 -->
                     <div class="product-card bg-white rounded-xl p-5 sm:p-6 md:p-8" data-category="creative">
                         <svg class="w-7 h-7 sm:w-9 md:w-10 md:h-10 text-cyan-500 mb-2 sm:mb-3 md:mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="LionKit 创作工坊图标"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
-                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2 md:mb-2">LionKit · 创作工坊</h3>
-                        <p class="text-sm md:text-sm product-card-description text-gray-600 mb-3 sm:mb-4 md:mb-4">你的 AI 创作工坊。GPT Image 2 精于文字与人物，Nano Banana 负责闪念灵感。512px–4K 原生渲染，亚秒级响应、并发 4 线程、多图编辑。填入 vibecodingapi.ai 的 Key 即可开箱使用。</p>
+                        <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-1.5 sm:mb-2 md:mb-2" data-i18n="productNames.lionkit">LionKit · 创作工坊</h3>
+                        <p class="text-sm md:text-sm product-card-description text-gray-600 mb-3 sm:mb-4 md:mb-4" data-i18n="productDescriptions.lionkit">你的 AI 创作工坊。GPT Image 2 精于文字与人物，Nano Banana 负责闪念灵感。512px–4K 原生渲染，亚秒级响应、并发 4 线程、多图编辑。填入 vibecodingapi.ai 的 Key 即可开箱使用。</p>
                         <div class="flex flex-wrap gap-2 mb-3 sm:mb-4">
                             <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300">#GPT-Image-2</span>
                             <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300">#NanoBanana</span>
                             <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300">#4K</span>
-                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300">#并发4线程</span>
-                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300">#多图编辑</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.parallel4">#并发4线程</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-300" data-i18n="tags.multiImageEdit">#多图编辑</span>
                         </div>
                         <div class="flex flex-col space-y-2">
                             <a href="https://image.lionkit.ai/" target="_blank" rel="noopener noreferrer" class="accent-color font-bold hover:text-gray-800 transition-colors inline-flex items-center group text-sm md:text-base">
-                                <span>去工坊创作</span> <span class="ml-1 text-lg md:text-xl transition-transform group-hover:translate-x-1">&rarr;</span>
+                                <span data-i18n="actions.openWorkshop">去工坊创作</span> <span class="ml-1 text-lg md:text-xl transition-transform group-hover:translate-x-1">&rarr;</span>
                             </a>
-                            <a href="https://my.feishu.cn/wiki/Mw9jwJamsiR0jHkhbQAcZNJinDf" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-500 hover:text-gray-700 inline-flex items-center">
+                            <a href="https://my.feishu.cn/wiki/Mw9jwJamsiR0jHkhbQAcZNJinDf" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-500 hover:text-gray-700 inline-flex items-center" data-i18n="actions.apiKeyGuide">
                                 获取 API Key 指南 →
                             </a>
                         </div>
@@ -449,7 +449,7 @@
                         <li class="hover:text-gray-900"><a href="https://1024hub.xyz/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center" data-i18n="footer.products.batchImage">AI 批量生图工具</a></li>
                         <li class="hover:text-gray-900"><a href="javascript:void(0)" data-i18n="footer.products.gemini">Gemini 多模态创作 (敬请期待)</a></li>
                         <li class="hover:text-gray-900"><a href="https://aigcpro.shop/" target="_blank" rel="noopener noreferrer" data-i18n="footer.products.selfService">自助交易与交付</a></li>
-                        <li class="hover:text-gray-900"><button type="button" data-open-subscription-modal class="inline-flex items-center bg-transparent p-0 text-left text-gray-600 transition-colors hover:text-gray-900">ChatGPT 自助订阅</button></li>
+                        <li class="hover:text-gray-900"><button type="button" data-open-subscription-modal class="inline-flex items-center bg-transparent p-0 text-left text-gray-600 transition-colors hover:text-gray-900" data-i18n="productNames.chatgptSub">ChatGPT 自助订阅</button></li>
                     </ul>
                 </div>
                 <div class="col-span-1 lg:col-span-1">

@@ -25,7 +25,8 @@
     async function loadDict(lang) {
         if (dicts[lang]) return dicts[lang];
         try {
-            const res = await fetch(`js/i18n/${lang}.json`, { cache: 'no-cache' });
+            // 用绝对路径，subpages 在 /pages/ 下也能加载到根目录的字典
+            const res = await fetch(`/js/i18n/${lang}.json`, { cache: 'no-cache' });
             dicts[lang] = await res.json();
         } catch (e) {
             dicts[lang] = {};
@@ -48,6 +49,9 @@
         });
         // 同步 html lang 与切换器文案
         document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+        // 浏览器标签栏标题（部分浏览器对 <title>.textContent 同步不及时，再显式赋值一次）
+        const metaTitle = t('meta.title');
+        if (metaTitle && metaTitle !== 'meta.title') document.title = metaTitle;
         document.querySelectorAll('[data-lang-switcher]').forEach(function (el) {
             el.textContent = currentLang === 'zh' ? 'EN' : '中';
             el.setAttribute('aria-label', currentLang === 'zh' ? 'Switch to English' : '切换到中文');
@@ -65,6 +69,7 @@
         if (lang !== DEFAULT_LANG) await loadDict(DEFAULT_LANG);
         await loadDict(lang);
         applyTranslations();
+        document.dispatchEvent(new CustomEvent('i18n:changed', { detail: { lang: currentLang } }));
     }
 
     function bindSwitchers() {
@@ -84,9 +89,18 @@
         if (currentLang !== DEFAULT_LANG) await loadDict(currentLang);
         applyTranslations();
         bindSwitchers();
+        window.i18n.ready = true;
+        document.dispatchEvent(new CustomEvent('i18n:ready', { detail: { lang: currentLang } }));
     }
 
-    window.i18n = { t: t, setLang: setLang, getLang: function () { return currentLang; } };
+    window.i18n = {
+        t: t,
+        setLang: setLang,
+        getLang: function () { return currentLang; },
+        // 暴露给动态生成内容的脚本（如 subscription-modal）：插入 DOM 后自行调用一次完成翻译
+        apply: applyTranslations,
+        ready: false
+    };
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
