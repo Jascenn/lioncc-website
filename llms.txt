@@ -1,0 +1,25 @@
+# LionCC
+
+> LionCC 是一个 Claude Code API 中转与管理工具，帮助用户以更低成本使用 Claude Code。
+
+## 关于
+
+LionCC 提供 Claude Code 拼车服务和 API 中转，支持多账号额度共享、CLI 配置工具（lioncc-cli），让个人开发者和团队以合理价格使用 Claude Max 能力。
+
+## 关键页面
+
+- /：产品介绍与功能说明
+- /pricing：定价方案
+- /docs：使用文档与 CLI 配置指南
+
+## 主要功能
+
+- Claude Code API 中转（端点：vibecodingapi.ai）
+- 拼车服务：多人共享 Claude Max 额度
+- lioncc-cli：命令行配置工具，快速切换 API 端点
+
+## 作者
+
+凌一（Lingyi）开发维护。
+- 个人主页：https://lingyi.bio
+- GitHub：https://github.com/Jascenn
