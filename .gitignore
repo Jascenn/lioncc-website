@@ -175,3 +175,6 @@ docs/
 # ============================================
 .vercel
 .vercel-*
+
+# 大体积视频文件（单独部署，不进 git）
+videos/chatgpt-no-vpn-system-hq.mp4
