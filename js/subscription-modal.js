@@ -20,7 +20,7 @@ const subscriptionOptions = [
 		accent: 'emerald',
 		eyebrowKey: 'subscription.chatgptplus.eyebrow',
 		titleKey: 'subscription.chatgptplus.title',
-		domain: 'chatgptplus.club',
+		domain: 'subcheap.free',
 		descriptionKey: 'subscription.entryDescription',
 		tagKeys: ['tags.independentBackend', 'tags.tutorial'],
 		facts: [
@@ -28,7 +28,7 @@ const subscriptionOptions = [
 			{ labelKey: 'subscription.factCardSample', valueRaw: 'Y2DD****O7Y8****' },
 			{ labelKey: 'subscription.factThreeSteps', valueKey: 'chatgpt.steps' },
 		],
-		primaryHref: 'https://chatgptplus.club',
+		primaryHref: 'https://subcheap.free',
 		secondaryHref: 'pages/chatgpt-plus-guide.html',
 	},
 ];
