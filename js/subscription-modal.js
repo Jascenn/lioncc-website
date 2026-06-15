@@ -5,7 +5,7 @@ const subscriptionOptions = [
 		accent: 'gray',
 		eyebrowKey: 'subscription.gptplus.eyebrow',
 		titleKey: 'subscription.gptplus.title',
-		domain: 'gptplus.free',
+		domain: 'pay.subcheap.free',
 		descriptionKey: 'subscription.entryDescription',
 		tagKeys: ['tags.independentBackend', 'tags.tutorial'],
 		facts: [
@@ -13,7 +13,7 @@ const subscriptionOptions = [
 			{ labelKey: 'subscription.factCardSample', valueRaw: '17ED****-****-****-****-********3CC8' },
 			{ labelKey: 'subscription.factThreeSteps', valueKey: 'chatgpt.steps' },
 		],
-		primaryHref: 'https://gptplus.free',
+		primaryHref: 'https://pay.subcheap.free/',
 		secondaryHref: 'pages/gptplus-free-guide.html',
 	},
 	{
