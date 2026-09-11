@@ -1,96 +1,3 @@
-// --- Case Study Data (i18n-driven) ---
-// 文案走 i18n 字典；产品名引用 productNames.* 让翻译统一。
-// comingSoon=true 时会在产品名后追加翻译后的"敬请期待"后缀。
-const caseStudies = [
-    {
-        titleKey: 'caseStudies.video.title',
-        summaryKey: 'caseStudies.video.summary',
-        products: [
-            { key: 'productNames.sora' },
-            { key: 'productNames.api' }
-        ],
-        link: 'https://www.sora2web.icu/'
-    },
-    {
-        titleKey: 'caseStudies.code.title',
-        summaryKey: 'caseStudies.code.summary',
-        products: [
-            { key: 'productNames.codeCarPool' },
-            { key: 'productNames.api' }
-        ],
-        link: 'https://codecodex.ai'
-    },
-    {
-        titleKey: 'caseStudies.commerce.title',
-        summaryKey: 'caseStudies.commerce.summary',
-        products: [
-            { key: 'productNames.api' },
-            { key: 'productNames.selfService', comingSoon: true }
-        ],
-        link: 'javascript:void(0)'
-    }
-];
-
-// --- Core Functions ---
-
-// 简单 HTML 转义，避免 i18n 字典里的特殊字符破坏模板。
-const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-}[c]));
-
-// Function to get translation helper
-const getTranslation = (key) => {
-    if (typeof window !== 'undefined' && window.i18n) {
-        return window.i18n.t(key);
-    }
-    return key;
-};
-
-// Function to dynamically render case studies
-const renderCaseStudies = () => {
-    try {
-        const container = document.getElementById('case-studies-container');
-        if (!container) return;
-
-        const comingSoonText = getTranslation('actions.comingSoon');
-        const integrationLabel = getTranslation('cases.integrationScheme');
-        const learnMoreLabel = getTranslation('cases.learnMore');
-
-        const htmlContent = caseStudies.map(study => {
-            const productHtml = study.products.map(product => {
-                let name = getTranslation(product.key);
-                if (product.comingSoon) name += ' (' + comingSoonText + ')';
-                return `<span class="text-xs font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full border border-gray-300">${escapeHtml(name)}</span>`;
-            }).join('');
-
-            const isExternal = study.link.startsWith('http');
-            const linkTarget = isExternal ? '_blank' : '_self';
-            const title = escapeHtml(getTranslation(study.titleKey));
-            const summary = escapeHtml(getTranslation(study.summaryKey));
-
-            return `
-                <div class="bg-white rounded-xl p-5 sm:p-6 md:p-6 border border-gray-200 hover:border-gray-400 transition-colors shadow-sm flex flex-col h-full">
-                    <a href="${study.link}" target="${linkTarget}" rel="noopener noreferrer" class="block flex-grow">
-                        <h3 class="text-lg sm:text-xl font-bold text-gray-900 mt-2 mb-2 sm:mb-3 leading-tight">${title}</h3>
-                        <div class="flex flex-wrap gap-2 mb-3 sm:mb-4">${productHtml}</div>
-                        <p class="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3">${summary}</p>
-                    </a>
-                    <div class="flex justify-between items-center text-gray-500 text-xs sm:text-sm border-t border-gray-200 pt-3 mt-auto">
-                        <span class="text-gray-600 font-semibold">${escapeHtml(integrationLabel)}</span>
-                        <a href="${study.link}" target="${linkTarget}" rel="noopener noreferrer" class="accent-color hover:text-gray-800 transition-colors inline-flex items-center group font-semibold">
-                            ${escapeHtml(learnMoreLabel)} <span class="ml-1 text-xl transition-transform group-hover:translate-x-1">&rarr;</span>
-                        </a>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        container.innerHTML = htmlContent;
-    } catch (error) {
-        console.error('Error rendering case studies:', error);
-    }
-};
-
 // Mobile Menu Toggle with Overlay
 const initMobileMenu = () => {
     try {
@@ -283,19 +190,8 @@ const initPlaceholderLinks = () => {
     }
 };
 
-// 案例区文案靠 i18n 字典；首屏在 i18n 就绪后再渲染，切语言时重渲染。
-function renderCaseStudiesWhenReady() {
-    if (window.i18n && window.i18n.ready) {
-        renderCaseStudies();
-    } else {
-        document.addEventListener('i18n:ready', renderCaseStudies, { once: true });
-    }
-}
-
 // Initialize everything on DOM load
 document.addEventListener('DOMContentLoaded', () => {
-    renderCaseStudiesWhenReady();
-    document.addEventListener('i18n:changed', renderCaseStudies);
     initMobileMenu();
     initProductFilter();
     initScrollSpy();
