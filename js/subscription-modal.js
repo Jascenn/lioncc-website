@@ -6,10 +6,10 @@ const subscriptionOptions = [
 		eyebrowKey: 'subscription.gptplus.eyebrow',
 		titleKey: 'subscription.gptplus.title',
 		domain: 'pay.subcheap.free',
-		descriptionKey: 'subscription.gptplus.description',
+		descriptionKey: 'subscription.entryDescription',
 		tagKeys: ['tags.independentBackend', 'tags.tutorial'],
 		facts: [
-			{ labelKey: 'subscription.factScenario', valueKey: 'subscription.scenarioAccount' },
+			{ labelKey: 'subscription.factScenario', valueKey: 'subscription.scenarioPlus' },
 			{ labelKey: 'subscription.factCardSample', valueRaw: '17ED****-****-****-****-********3CC8' },
 			{ labelKey: 'subscription.factThreeSteps', valueKey: 'chatgpt.steps' },
 		],
@@ -21,7 +21,7 @@ const subscriptionOptions = [
 		eyebrowKey: 'subscription.chatgptplus.eyebrow',
 		titleKey: 'subscription.chatgptplus.title',
 		domain: 'subcheap.free',
-		descriptionKey: 'subscription.chatgptplus.description',
+		descriptionKey: 'subscription.entryDescription',
 		tagKeys: ['tags.independentBackend', 'tags.tutorial'],
 		facts: [
 			{ labelKey: 'subscription.factScenario', valueKey: 'subscription.scenarioPlus' },
