@@ -1,35 +1,7 @@
 // --- Case Study Data (i18n-driven) ---
 // 文案走 i18n 字典；产品名引用 productNames.* 让翻译统一。
 // comingSoon=true 时会在产品名后追加翻译后的"敬请期待"后缀。
-const caseStudies = [
-    {
-        titleKey: 'caseStudies.video.title',
-        summaryKey: 'caseStudies.video.summary',
-        products: [
-            { key: 'productNames.sora' },
-            { key: 'productNames.api' }
-        ],
-        link: 'https://www.sora2web.icu/'
-    },
-    {
-        titleKey: 'caseStudies.code.title',
-        summaryKey: 'caseStudies.code.summary',
-        products: [
-            { key: 'productNames.codeCarPool' },
-            { key: 'productNames.api' }
-        ],
-        link: 'https://codecodex.ai'
-    },
-    {
-        titleKey: 'caseStudies.commerce.title',
-        summaryKey: 'caseStudies.commerce.summary',
-        products: [
-            { key: 'productNames.api' },
-            { key: 'productNames.selfService', comingSoon: true }
-        ],
-        link: 'javascript:void(0)'
-    }
-];
+const caseStudies = [];
 
 // --- Core Functions ---
 
@@ -143,6 +115,7 @@ const initProductFilter = () => {
     try {
         const productTabs = document.querySelectorAll('.product-tab');
         const productCards = document.querySelectorAll('.product-card');
+        if (!productTabs.length) return;
 
         // Filter and animate function (from original LIONCC.AI.html)
         const filterAndAnimate = (category) => {
@@ -179,7 +152,8 @@ const initProductFilter = () => {
         });
 
         // Initial filter: show 'all'
-        document.querySelector('.product-tab[data-category="all"]').click();
+        const allTab = document.querySelector('.product-tab[data-category="all"]');
+        if (allTab) allTab.click();
     } catch (error) {
         console.error('Error initializing product filter:', error);
     }
