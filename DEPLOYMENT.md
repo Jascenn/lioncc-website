@@ -208,7 +208,7 @@ lioncc-website/
 ├── js/
 │   ├── i18n.js                         # 轻量 i18n 运行时
 │   ├── i18n/{zh,en}.json               # 字典
-│   ├── main.js                         # 首页交互（OpenAI 自动充值入口 / 滚动 spy）
+│   ├── main.js                         # 首页交互（产品筛选 / 案例渲染 / 滚动 spy）
 │   ├── subscription-modal.js           # 订阅弹窗（点 ChatGPT 卡触发）
 │   └── tutorial-guide.js               # 教程页交互
 │
@@ -273,8 +273,8 @@ curl -X POST "https://api.vercel.com/v9/projects/lioncc-website/link?teamId=<YOU
 | 2026-04-27 | `40a3b86` | 新增 LionKit · 创作工坊产品卡 |
 | 2026-04-27 | `6d0b587` | i18n 框架上线（zh/en 切换） |
 | 2026-04-27 | `f650a38` | i18n 全覆盖（modal / 子页 / 案例区） |
-| 2026-04-27 | `ab10ed8` | 历史产品卡提交，当前已从公开首页下线 |
-| 2026-04-27 | `cd4a8c8` | 历史 SEO 调整，当前已替换为 OpenAI 自动充值定位 |
+| 2026-04-27 | `ab10ed8` | 新增 VibeCodingAPI 创意社区产品卡 |
+| 2026-04-27 | `cd4a8c8` | SEO meta 同步 GPT Image 2 创意社区 |
 
 ---
 
@@ -326,17 +326,12 @@ python3 -m http.server 5180 --bind 127.0.0.1
 
 ## 最近更新
 
-### 2026-09-11
-- ✅ 首页仅保留 OpenAI 自动充值系统卡片
-- ✅ 下线非充值旧产品入口
-- ✅ Claude 教程页归档保留并从 sitemap 移除
-
-### 2026-04-27（历史记录）
-- ✅ 历史新增 LionKit · 创作工坊产品卡（当前已从公开首页下线）
+### 2026-04-27（本日多次推送）
+- ✅ 新增 LionKit · 创作工坊产品卡（GPT Image 2 + Nano Banana 4K 多图编辑）
 - ✅ 自研轻量 i18n 框架上线（`js/i18n.js` ~110 行 + `zh/en.json` 共 237 keys）
 - ✅ 全站双语覆盖：首页 / 订阅弹窗 / privacy / terms / 教程页 chrome
-- ✅ 历史主页 SEO meta 调整（当前已替换为 OpenAI 自动充值定位）
-- ✅ 历史新增创意社区产品卡（当前已从公开首页下线）
+- ✅ 主页 SEO meta 5 处同步 LionKit 与 GPT Image 2 创意社区
+- ✅ 新增 VibeCodingAPI 创意社区产品卡（GPT Image 2 + prompt 案例库）
 - ✅ 修复 privacy/terms 在 `/pages/` 下 `index.html` href 指向错误（→ `../index.html`）
 - ✅ Vercel 副部署（`jascens-projects/lioncc-website`）通过 API 断开 Git 连接，仓库 commit 列表不再显示红 ❌（项目本体保留，可一键回滚）
 - ✅ DEPLOYMENT.md 架构章节按实际链路重写
@@ -349,8 +344,8 @@ python3 -m http.server 5180 --bind 127.0.0.1
 - ✅ 修复 terms/privacy 的 `css/styles.css` 路径 bug
 - ✅ 引入 Bun + pre-commit hook 自动构建链
 
-### 2024-12-04（历史记录）
-- ✅ 历史添加批量生图工具产品卡片（当前已从公开首页下线）
+### 2024-12-04
+- ✅ 添加 AI 批量生图工具产品卡片（外链 1024hub.xyz）
 - ✅ 添加 CNAME 文件支持自定义域名
 
 ---
@@ -362,4 +357,4 @@ python3 -m http.server 5180 --bind 127.0.0.1
 
 ---
 
-📝 文档更新日期：2026-09-11
+📝 文档更新日期：2026-04-27
