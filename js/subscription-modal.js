@@ -91,11 +91,11 @@ const initSubscriptionModal = () => {
 		const root = document.getElementById('subscription-modal-root');
 		if (!root) return;
 
-		root.innerHTML = `
-			<div id="subscription-modal" class="fixed inset-0 z-50 hidden" aria-hidden="true">
-				<div data-close-subscription-modal class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm"></div>
-				<div data-subscription-modal-frame class="relative flex min-h-full items-center justify-center p-4 sm:p-6">
-					<div data-subscription-modal-panel class="relative w-full max-w-5xl overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-2xl">
+			root.innerHTML = `
+				<div id="subscription-modal" class="fixed inset-0 z-50 hidden h-dvh overflow-y-auto overscroll-contain" aria-hidden="true">
+					<div data-close-subscription-modal class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm"></div>
+					<div data-subscription-modal-frame class="relative flex min-h-dvh items-start justify-center px-4 py-6 sm:px-6">
+						<div data-subscription-modal-panel class="relative w-full max-w-5xl overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-2xl">
 						<div class="flex items-start justify-between gap-4 border-b border-gray-200 px-5 py-5 sm:px-8">
 							<div>
 								<p class="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-600" data-i18n="subscription.modal.eyebrow"></p>
