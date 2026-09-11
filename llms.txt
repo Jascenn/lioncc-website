@@ -1,25 +1,23 @@
-# LionCC
+# LIONCC.AI
 
-> LionCC 是一个 Claude Code API 中转与管理工具，帮助用户以更低成本使用 Claude Code。
+> LIONCC.AI 当前公开提供 OpenAI 自动充值系统。
 
 ## 关于
 
-LionCC 提供 Claude Code 拼车服务和 API 中转，支持多账号额度共享、CLI 配置工具（lioncc-cli），让个人开发者和团队以合理价格使用 Claude Max 能力。
+LIONCC.AI 保留 ChatGPT 帐号充值与 ChatGPT Plus 会员充值两个入口。用户可按站内教程完成卡密验证、充值密钥获取与确认充值。
 
 ## 关键页面
 
-- /：产品介绍与功能说明
-- /pricing：定价方案
-- /docs：使用文档与 CLI 配置指南
+- /：OpenAI 自动充值系统入口
+- /pages/gptplus-free-guide.html：ChatGPT 帐号充值教程
+- /pages/chatgpt-plus-guide.html：ChatGPT Plus 充值教程
 
-## 主要功能
+## 当前公开服务
 
-- Claude Code API 中转（端点：vibecodingapi.ai）
-- 拼车服务：多人共享 Claude Max 额度
-- lioncc-cli：命令行配置工具，快速切换 API 端点
+- ChatGPT 帐号充值
+- ChatGPT Plus 会员充值
+- OpenAI 自动充值站内教程
 
-## 作者
+## 归档说明
 
-凌一（Lingyi）开发维护。
-- 个人主页：https://lingyi.bio
-- GitHub：https://github.com/Jascenn
+历史产品与教程已从公开入口下线，不再作为当前主营业务展示。
