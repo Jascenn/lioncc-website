@@ -30,6 +30,13 @@
 .manual-list span{font-size:13.5px;color:var(--t2);line-height:1.7}
 .inline-code{font-family:var(--mono);font-size:.92em;background:#111;border:1px solid #222;border-radius:6px;padding:2px 7px;color:#d6ffe9;word-break:break-all}
 .step-note{margin-top:10px;padding:10px 14px;border-radius:10px;background:rgba(255,214,10,.06);border:1px solid rgba(255,214,10,.18);font-size:13px;color:#e8d48a;line-height:1.7}
+.step-card .step-body{grid-column:2/4}
+@media(max-width:768px){
+  .step-card .step-body{grid-column:auto}
+  .agent-prompt{padding:16px 16px 14px}
+  .prompt-copy{position:static;display:block;width:100%;margin-bottom:12px}
+  .manual-list li{flex-direction:row}
+}
 </style>
 <script src="../js/i18n.js" defer></script>
 </head>
@@ -139,7 +146,7 @@
 
   <div class="step-card reveal" data-delay="0">
     <div class="step-num">01</div>
-    <div class="step-body" style="grid-column:2/4">
+    <div class="step-body">
       <h3>打开你的 AI Agent，新建对话</h3>
       <p>确认 Agent 有权限执行终端命令（Codex 默认就有）。如果是第一次用，直接把下面整段指令原样发给它即可。</p>
       <div class="agent-prompt">
@@ -166,7 +173,7 @@
 
   <div class="step-card reveal" data-delay="60">
     <div class="step-num">02</div>
-    <div class="step-body" style="grid-column:2/4">
+    <div class="step-body">
       <h3>Agent 自动完成的部分</h3>
       <p>发出指令后你不用管，Agent 会依次完成：克隆仓库 → 检查并启动 Docker → 构建镜像 → 启动容器 → 生成并保存 API Key → 健康检查 → 打开后台。首次构建要下载浏览器运行环境，几分钟到十几分钟都正常，让它自己跑完。</p>
       <div class="step-note">如果中途报错，不要自己动手改。直接对 Agent 说「看看刚才的报错，修复后继续」，它会读日志、定位原因、重试。</div>
@@ -175,7 +182,7 @@
 
   <div class="step-card reveal" data-delay="120">
     <div class="step-num">03</div>
-    <div class="step-body" style="grid-column:2/4">
+    <div class="step-body">
       <h3>验收 Agent 的成果</h3>
       <p>Agent 说部署完成后，用浏览器打开 <span class="inline-code">http://127.0.0.1:18610/admin</span>。能看到管理后台、剪贴板里能粘贴出 API Key，就说明服务已经跑起来了。不放心的话，再让 Agent 自检一句：</p>
       <div class="agent-prompt">
@@ -192,7 +199,7 @@
   <p class="resources-desc" style="max-width:680px">账号登录和 Cookie 导入涉及你的私密凭证，不要让 Agent 代替，也不要把 Cookie 粘贴到任何聊天窗口里。</p>
   <div class="step-card reveal" data-delay="0">
     <div class="step-num">04</div>
-    <div class="step-body" style="grid-column:2/4">
+    <div class="step-body">
       <h3>安装导入扩展并登录 Muse</h3>
       <ul class="manual-list">
         <li><span class="manual-check">✓</span><div><strong>加载扩展</strong><span>Chrome 打开 <span class="inline-code">chrome://extensions/</span>，开启右上角开发者模式，点「加载已解压的扩展程序」，选择部署目录里的 <span class="inline-code">extension</span> 文件夹（不确定路径就直接问 Agent：扩展目录在哪）。</span></div></li>
@@ -202,7 +209,7 @@
   </div>
   <div class="step-card reveal" data-delay="60">
     <div class="step-num">05</div>
-    <div class="step-body" style="grid-column:2/4">
+    <div class="step-body">
       <h3>一键导入 Cookie</h3>
       <p>点浏览器右上角的「Muse2API Cookie 导入」扩展图标，填三项：</p>
       <ul class="manual-list">
@@ -215,7 +222,7 @@
   </div>
   <div class="step-card reveal" data-delay="120">
     <div class="step-num">06</div>
-    <div class="step-body" style="grid-column:2/4">
+    <div class="step-body">
       <h3>测试账号池，接入你的工具</h3>
       <p>回到管理后台的「账号池」，给每个账号点一次「测试」，状态变绿就说明这条账号可用。之后在任何支持 OpenAI 接口的客户端里这样填：</p>
       <div class="agent-prompt"><pre>Base URL：http://127.0.0.1:18610/v1
