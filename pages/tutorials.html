@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教程合集 - LIONCC.AI</title>
+<meta name="description" content="LIONCC.AI 教程合集：AI 工具部署与开源实战指南，从复制一条 Agent 指令到完整跑通，图文步骤逐步对照。">
+<link rel="canonical" href="https://lioncc.ai/pages/tutorials.html">
+<meta property="og:url" content="https://lioncc.ai/pages/tutorials.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LIONCC.AI">
+<meta property="og:title" content="教程合集 - LIONCC.AI">
+<meta property="og:description" content="AI 工具部署与开源实战指南，从复制一条 Agent 指令到完整跑通。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="教程合集 - LIONCC.AI">
+<meta name="twitter:description" content="AI 工具部署与开源实战指南，从复制一条 Agent 指令到完整跑通。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tutorial-guide.css">
+<style>
+.tut-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.tut-card{display:flex;flex-direction:column;background:#0a0a0a;border:1px solid #1e1e1e;border-radius:18px;padding:26px 26px 22px;text-decoration:none;color:inherit;box-shadow:var(--shadow-card);transition:transform .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease)}
+.tut-card:hover{transform:translateY(-3px);border-color:#333;box-shadow:var(--shadow-hover)}
+.tut-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.tut-icon{width:46px;height:46px;border-radius:13px;background:rgba(16,163,127,.1);border:1px solid rgba(16,163,127,.22);display:flex;align-items:center;justify-content:center;font-size:22px}
+.tut-badge{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid rgba(16,163,127,.35);color:var(--accent)}
+.tut-card h3{font-size:19px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.tut-card p{font-size:13.5px;color:var(--t2);line-height:1.75;margin-bottom:18px}
+.tut-meta{margin-top:auto;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;color:#6e6e6e;letter-spacing:1px}
+.tut-meta .dot{width:3px;height:3px;border-radius:50%;background:#333}
+.tut-meta .arrow{margin-left:auto;color:var(--accent);font-size:15px;transition:transform .3s var(--ease)}
+.tut-card:hover .arrow{transform:translateX(4px)}
+.tut-soon{opacity:.55;pointer-events:none}
+.tut-soon .tut-badge{border-color:#2a2a2a;color:#666}
+</style>
+<script src="../js/i18n.js" defer></script>
+</head>
+<body>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+<header class="hero" style="min-height:72vh">
+  <div class="hero-eyebrow">LIONCC.AI · 教程合集</div>
+  <h1 class="hero-title">教程<br><em>合集</em></h1>
+  <p class="hero-desc">AI 工具部署与开源实战指南。每篇都按“能直接照着做”的标准写：能交给 Agent 的交给 Agent，必须人工的只留最少步骤。</p>
+  <div class="hero-chips">
+    <div class="hero-chip"><span class="chip-dot green"></span>持续更新</div>
+    <div class="hero-chip"><span class="chip-dot blue"></span>图文步骤</div>
+  </div>
+</header>
+
+<main class="steps-section" style="padding-top:40px">
+  <div class="section-label">开源实战</div>
+  <h2 class="section-title">部署与<span>自动化</span></h2>
+  <div class="tut-grid">
+    <a class="tut-card reveal" data-delay="0" href="muse2api-agent-guide.html">
+      <div class="tut-top">
+        <div class="tut-icon">🤖</div>
+        <span class="tut-badge">New</span>
+      </div>
+      <h3>Muse 算力代理部署</h3>
+      <p>复制一条指令让 AI Agent 自动部署 muse2api，把 Muse 免费算力变成 OpenAI 兼容接口：多账号轮询、48 小时保活、生图生视频全都能接。</p>
+      <div class="tut-meta"><span>AGENT 部署</span><span class="dot"></span><span>约 10 分钟</span><span class="arrow">→</span></div>
+    </a>
+    <div class="tut-card tut-soon reveal" data-delay="60">
+      <div class="tut-top">
+        <div class="tut-icon">🧩</div>
+        <span class="tut-badge">即将上线</span>
+      </div>
+      <h3>更多实战教程</h3>
+      <p>下一批选题整理中：本地 AI 工具链、浏览器自动化、数据分析流水线。有想看的主题可以直接找客服提。</p>
+      <div class="tut-meta"><span>规划中</span><span class="dot"></span><span class="arrow">→</span></div>
+    </div>
+  </div>
+
+  <div class="summary reveal">
+    <div class="summary-icon">📌</div>
+    <h2>找教程</h2>
+    <p>站内产品（ChatGPT 充值等）的使用教程仍保留在各产品卡片内，可以从首页产品矩阵进入；这个页面专门收录独立的开源实战内容。</p>
+    <div class="summary-actions">
+      <a class="summary-action primary" href="../index.html#products">返回产品矩阵</a>
+      <a class="summary-action" href="muse2api-agent-guide.html">看最新教程</a>
+    </div>
+  </div>
+</main>
+<script src="../js/tutorial-guide.js"></script>
+</body>
+</html>

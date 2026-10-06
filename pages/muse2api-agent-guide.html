@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muse 算力代理部署教程 - LIONCC.AI</title>
+<meta name="description" content="LIONCC.AI 站内教程：用 AI Agent 一键部署开源工具 muse2api，把 Muse 免费算力变成 OpenAI 兼容接口，支持多账号轮询、生图与生视频。">
+<link rel="canonical" href="https://lioncc.ai/pages/muse2api-agent-guide.html">
+<meta property="og:url" content="https://lioncc.ai/pages/muse2api-agent-guide.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="LIONCC.AI">
+<meta property="og:title" content="Muse 算力代理部署教程 - LIONCC.AI">
+<meta property="og:description" content="复制一条指令交给 AI Agent，自动完成 muse2api 本地部署；你只需要登录账号、导入 Cookie、点一下测试。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Muse 算力代理部署教程 - LIONCC.AI">
+<meta name="twitter:description" content="复制一条指令交给 AI Agent，自动完成 muse2api 本地部署；你只需要登录账号、导入 Cookie、点一下测试。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tutorial-guide.css">
+<style>
+.agent-prompt{position:relative;background:#050505;border:1px solid #1e1e1e;border-left:3px solid var(--accent);border-radius:14px;padding:22px 24px;margin:18px 0 8px;overflow:auto}
+.agent-prompt pre{font-family:var(--mono);font-size:13px;line-height:1.8;color:#d6ffe9;white-space:pre-wrap;word-break:break-word;margin:0}
+.prompt-copy{position:absolute;top:12px;right:12px;padding:7px 14px;border-radius:9px;border:1px solid rgba(16,163,127,.3);background:rgba(16,163,127,.12);color:var(--accent);font-size:12px;font-weight:700;cursor:pointer}
+.prompt-copy:hover{background:rgba(16,163,127,.2)}
+.manual-list{list-style:none;padding:0;margin:14px 0 0}
+.manual-list li{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid #1a1a1a}
+.manual-list li:first-child{border-top:none}
+.manual-check{flex-shrink:0;width:26px;height:26px;border-radius:8px;background:rgba(16,163,127,.12);border:1px solid rgba(16,163,127,.25);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--accent);margin-top:2px}
+.manual-list strong{display:block;font-size:15px;margin-bottom:2px}
+.manual-list span{font-size:13.5px;color:var(--t2);line-height:1.7}
+.inline-code{font-family:var(--mono);font-size:.92em;background:#111;border:1px solid #222;border-radius:6px;padding:2px 7px;color:#d6ffe9;word-break:break-all}
+.step-note{margin-top:10px;padding:10px 14px;border-radius:10px;background:rgba(255,214,10,.06);border:1px solid rgba(255,214,10,.18);font-size:13px;color:#e8d48a;line-height:1.7}
+</style>
+<script src="../js/i18n.js" defer></script>
+</head>
+<body>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+<header class="hero">
+  <div class="hero-eyebrow">LIONCC.AI · Agent 实战教程</div>
+  <h1 class="hero-title">Muse 算力<br><em>Agent 部署</em><br>指南</h1>
+  <p class="hero-desc">不需要自己敲命令。复制一条指令发给你的 AI Agent，它会自动完成 muse2api 的下载、构建和启动；你只负责登录 Muse 账号、导入 Cookie、点一下测试。</p>
+  <div class="hero-chips">
+    <div class="hero-chip"><span class="chip-dot green"></span>1 条 Agent 指令</div>
+    <div class="hero-chip"><span class="chip-dot blue"></span>约 10 分钟上手</div>
+    <div class="hero-chip"><span class="chip-dot yellow"></span>多账号轮询</div>
+  </div>
+  <div class="hero-actions">
+    <a class="hero-action primary" href="https://github.com/czg86389-hub/muse2api" target="_blank" rel="noreferrer">打开开源项目</a>
+    <a class="hero-action" href="#agent-steps">查看图文步骤</a>
+    <a class="hero-action" href="#faq-guide">常见问题</a>
+  </div>
+</header>
+
+<nav class="page-nav" aria-label="页内导航">
+  <div class="page-nav-inner">
+    <a class="page-nav-link" href="#prep-section">
+      <div class="page-nav-copy"><span class="page-nav-label">开始前</span><span class="page-nav-meta">先准备三样东西</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+    <a class="page-nav-link" href="#agent-steps">
+      <div class="page-nav-copy"><span class="page-nav-label">Agent 步骤</span><span class="page-nav-meta">复制指令交给它</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+    <a class="page-nav-link" href="#manual-steps">
+      <div class="page-nav-copy"><span class="page-nav-label">人工三步</span><span class="page-nav-meta">登录 · 导入 · 测试</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+    <a class="page-nav-link" href="#faq-guide">
+      <div class="page-nav-copy"><span class="page-nav-label">常见问题</span><span class="page-nav-meta">先看拦截点</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+  </div>
+</nav>
+
+<section class="resources">
+  <div class="resources-head">
+    <div class="resources-copy">
+      <div class="resources-kicker">这套教程的思路</div>
+      <p class="resources-desc">muse2api 是一个开源代理工具：它把 Muse 网页版的免费算力封装成 OpenAI 兼容接口，自带 48 小时保活和多账号轮询。部署本身全是命令行操作——这恰好是最适合交给 AI Agent 干的活。</p>
+    </div>
+  </div>
+  <div class="resources-inner">
+    <a href="https://github.com/czg86389-hub/muse2api" target="_blank" rel="noreferrer" class="res-card">
+      <div class="res-icon">📦</div>
+      <div class="res-body">
+        <div class="res-title">muse2api 开源仓库</div>
+        <div class="res-url">github.com/czg86389-hub/muse2api</div>
+      </div>
+      <div class="res-arrow">→</div>
+    </a>
+    <a href="#agent-steps" class="res-card">
+      <div class="res-icon">🤖</div>
+      <div class="res-body">
+        <div class="res-title">一键 Agent 指令</div>
+        <div class="res-url">复制后发给 Codex / ChatGPT 等 Agent</div>
+      </div>
+      <div class="res-arrow">→</div>
+    </a>
+    <a href="#manual-steps" class="res-card">
+      <div class="res-icon">🖐️</div>
+      <div class="res-body">
+        <div class="res-title">需要你亲手做的部分</div>
+        <div class="res-url">只有登录账号和导入 Cookie 三步</div>
+      </div>
+      <div class="res-arrow">→</div>
+    </a>
+  </div>
+  <div class="resources-back">
+    <a href="../index.html#products" class="resources-back-link">← 返回 LIONCC.AI / 产品矩阵</a>
+  </div>
+</section>
+
+<section class="prep-section" id="prep-section">
+  <div class="section-label">开始前</div>
+  <h2 class="section-title">先准备这<span>三样</span></h2>
+  <div class="prep-grid">
+    <div class="prep-card">
+      <div class="prep-step">01</div>
+      <h3>一个 AI Agent</h3>
+      <p>Codex、ChatGPT 桌面版等能操作你电脑终端的 Agent 都可以。它能读屏幕、跑命令、自己排错，这是整套流程的核心。</p>
+    </div>
+    <div class="prep-card">
+      <div class="prep-step">02</div>
+      <h3>你自己的 Muse 账号</h3>
+      <p>至少 1 个，想用多账号轮询就准备 2 个以上。必须是你自己注册拥有的账号，不要买或借别人的 Cookie。</p>
+    </div>
+    <div class="prep-card">
+      <div class="prep-step">03</div>
+      <h3>Chrome 浏览器</h3>
+      <p>导入 Cookie 靠官方自带的 Chrome 扩展完成。每个账号建议用一个独立的 Chrome 用户 profile，避免登录态互相覆盖。</p>
+    </div>
+  </div>
+</section>
+
+<main class="steps-section" id="agent-steps">
+  <div class="section-label">Agent 步骤</div>
+  <h2 class="section-title">把部署<span>交给 Agent</span></h2>
+
+  <div class="step-card reveal" data-delay="0">
+    <div class="step-num">01</div>
+    <div class="step-body" style="grid-column:2/4">
+      <h3>打开你的 AI Agent，新建对话</h3>
+      <p>确认 Agent 有权限执行终端命令（Codex 默认就有）。如果是第一次用，直接把下面整段指令原样发给它即可。</p>
+      <div class="agent-prompt">
+        <button class="prompt-copy" type="button" data-copy-text="请帮我把开源项目 muse2api 部署到本机，要求如下：
+1. 克隆 https://github.com/czg86389-hub/muse2api 到本地目录 muse2api-local；
+2. 检查 Docker 是否安装并启动，没有就先帮我安装或给出明确指引；
+3. 用 docker compose 构建并启动服务，端口只绑定 127.0.0.1:18610，不要暴露到公网或局域网；
+4. 生成一个强随机 API Key 保存到 .env 文件，权限设为 600，不要在聊天里显示内容；
+5. 启动后验证 http://127.0.0.1:18610/healthz 返回 ok，再打开管理后台 http://127.0.0.1:18610/admin 给我；
+6. 把 API Key 复制到我的剪贴板，但不要打印出来；
+7. 最后列出还需要我人工完成哪几步。">复制指令</button>
+        <pre>请帮我把开源项目 muse2api 部署到本机，要求如下：
+1. 克隆 https://github.com/czg86389-hub/muse2api 到本地目录 muse2api-local；
+2. 检查 Docker 是否安装并启动，没有就先帮我安装或给出明确指引；
+3. 用 docker compose 构建并启动服务，端口只绑定 127.0.0.1:18610，不要暴露到公网或局域网；
+4. 生成一个强随机 API Key 保存到 .env 文件，权限设为 600，不要在聊天里显示内容；
+5. 启动后验证 http://127.0.0.1:18610/healthz 返回 ok，再打开管理后台 http://127.0.0.1:18610/admin 给我；
+6. 把 API Key 复制到我的剪贴板，但不要打印出来；
+7. 最后列出还需要我人工完成哪几步。</pre>
+      </div>
+      <p style="margin-top:12px">提示：如果你所在的网络访问 GitHub 或 Muse 较慢，在指令最后加一句「构建下载慢时可以走我本机 7890 端口的代理」，Agent 会自己处理。</p>
+    </div>
+  </div>
+
+  <div class="step-card reveal" data-delay="60">
+    <div class="step-num">02</div>
+    <div class="step-body" style="grid-column:2/4">
+      <h3>Agent 自动完成的部分</h3>
+      <p>发出指令后你不用管，Agent 会依次完成：克隆仓库 → 检查并启动 Docker → 构建镜像 → 启动容器 → 生成并保存 API Key → 健康检查 → 打开后台。首次构建要下载浏览器运行环境，几分钟到十几分钟都正常，让它自己跑完。</p>
+      <div class="step-note">如果中途报错，不要自己动手改。直接对 Agent 说「看看刚才的报错，修复后继续」，它会读日志、定位原因、重试。</div>
+    </div>
+  </div>
+
+  <div class="step-card reveal" data-delay="120">
+    <div class="step-num">03</div>
+    <div class="step-body" style="grid-column:2/4">
+      <h3>验收 Agent 的成果</h3>
+      <p>Agent 说部署完成后，用浏览器打开 <span class="inline-code">http://127.0.0.1:18610/admin</span>。能看到管理后台、剪贴板里能粘贴出 API Key，就说明服务已经跑起来了。不放心的话，再让 Agent 自检一句：</p>
+      <div class="agent-prompt">
+        <button class="prompt-copy" type="button" data-copy-text="请自检部署结果：确认容器在运行、healthz 返回 ok、端口只监听 127.0.0.1、.env 文件权限是 600，然后把检查结果汇总告诉我。">复制自检指令</button>
+        <pre>请自检部署结果：确认容器在运行、healthz 返回 ok、端口只监听 127.0.0.1、.env 文件权限是 600，然后把检查结果汇总告诉我。</pre>
+      </div>
+    </div>
+  </div>
+</main>
+
+<main class="steps-section" id="manual-steps">
+  <div class="section-label">人工三步</div>
+  <h2 class="section-title">这三步<span>必须你本人做</span></h2>
+  <p class="resources-desc" style="max-width:680px">账号登录和 Cookie 导入涉及你的私密凭证，不要让 Agent 代替，也不要把 Cookie 粘贴到任何聊天窗口里。</p>
+  <div class="step-card reveal" data-delay="0">
+    <div class="step-num">04</div>
+    <div class="step-body" style="grid-column:2/4">
+      <h3>安装导入扩展并登录 Muse</h3>
+      <ul class="manual-list">
+        <li><span class="manual-check">✓</span><div><strong>加载扩展</strong><span>Chrome 打开 <span class="inline-code">chrome://extensions/</span>，开启右上角开发者模式，点「加载已解压的扩展程序」，选择部署目录里的 <span class="inline-code">extension</span> 文件夹（不确定路径就直接问 Agent：扩展目录在哪）。</span></div></li>
+        <li><span class="manual-check">✓</span><div><strong>登录账号</strong><span>在这个浏览器里打开 muse.ai 并登录，确认能看到聊天界面。要导入第二个账号，就新建一个 Chrome 用户再登录，互不干扰。</span></div></li>
+      </ul>
+    </div>
+  </div>
+  <div class="step-card reveal" data-delay="60">
+    <div class="step-num">05</div>
+    <div class="step-body" style="grid-column:2/4">
+      <h3>一键导入 Cookie</h3>
+      <p>点浏览器右上角的「Muse2API Cookie 导入」扩展图标，填三项：</p>
+      <ul class="manual-list">
+        <li><span class="manual-check">✓</span><div><strong>服务地址</strong><span><span class="inline-code">http://127.0.0.1:18610</span></span></div></li>
+        <li><span class="manual-check">✓</span><div><strong>API Key</strong><span>直接粘贴，Agent 已经帮你放进剪贴板了</span></div></li>
+        <li><span class="manual-check">✓</span><div><strong>账号标签</strong><span>随便起，比如 muse-01，方便以后在后台分辨</span></div></li>
+      </ul>
+      <p style="margin-top:12px">点「读取并导入」，看到「导入成功」即可。第二个账号换一个 Chrome 用户重复这一步。导入两个以上后，多账号轮询和故障切换自动生效，不需要额外开关。</p>
+    </div>
+  </div>
+  <div class="step-card reveal" data-delay="120">
+    <div class="step-num">06</div>
+    <div class="step-body" style="grid-column:2/4">
+      <h3>测试账号池，接入你的工具</h3>
+      <p>回到管理后台的「账号池」，给每个账号点一次「测试」，状态变绿就说明这条账号可用。之后在任何支持 OpenAI 接口的客户端里这样填：</p>
+      <div class="agent-prompt"><pre>Base URL：http://127.0.0.1:18610/v1
+API Key：粘贴你的 m2a_ 开头密钥
+模型名：muse-spark（对话 / 生图 / 生视频都走这个接口）</pre></div>
+      <p style="margin-top:12px">最后发一条真实消息或生成一张图验证。想省事就把后台截图发给 Agent，说「帮我确认账号池状态是否正常」。</p>
+    </div>
+  </div>
+  <div class="summary reveal">
+    <div class="summary-icon">✓</div>
+    <h2>部署完成</h2>
+    <p>Muse 的算力现在是一个标准的 OpenAI 兼容接口了：48 小时保活自动续期，多账号自动轮询。工具里改两个参数就能用。</p>
+    <div class="summary-actions">
+      <a class="summary-action primary" href="http://127.0.0.1:18610/admin" target="_blank" rel="noreferrer">打开管理后台</a>
+      <a class="summary-action" href="https://github.com/czg86389-hub/muse2api" target="_blank" rel="noreferrer">查看开源项目</a>
+      <a class="summary-action" href="../index.html#products">返回产品矩阵</a>
+    </div>
+  </div>
+</main>
+
+<section class="faq-section" id="faq-guide">
+  <div class="section-label">常见问题</div>
+  <h2 class="section-title">操作中常见的<span>几个问题</span></h2>
+  <div class="faq-grid">
+    <div class="faq-card">
+      <h3>扩展导入失败或缺 Cookie</h3>
+      <p>几乎都是还没登录成功。确认当前 Chrome 用户能在 muse.ai 看到聊天界面再点导入；服务地址结尾不要带 <span class="inline-code">/v1</span>，API Key 要用 <span class="inline-code">m2a_</span> 开头那个。</p>
+    </div>
+    <div class="faq-card">
+      <h3>构建很慢或下载失败</h3>
+      <p>首次构建要下载浏览器环境，属于正常现象。让 Agent 自己处理：把报错发给它，或直接说「下载慢就走我本机 7890 端口的代理」，不要中途手动删除目录重来。</p>
+    </div>
+    <div class="faq-card">
+      <h3>安全吗？账号会有风险吗？</h3>
+      <p>服务只监听你本机，API Key 和 Cookie 都存在本地。但要清楚边界：这类工具本质是代理网页版算力，请只用自己注册的账号、自用别转卖，并自行评估平台条款风险。LIONCC.AI 仅提供部署教程，与该项目无关。</p>
+    </div>
+    <div class="faq-card">
+      <h3>重启电脑后服务没了</h3>
+      <p>容器默认不会随机启动。开机后对 Agent 说一句「帮我把 muse2api 重新启动并自检」，或者让它顺手把容器设为 <span class="inline-code">restart: unless-stopped</span>，以后就不用管了。</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="support-contact">
+  <div class="section-label">联系支持</div>
+  <h2 class="section-title">需要人工协助时<span>直接联系</span></h2>
+  <div class="contact-grid">
+    <div class="contact-card primary reveal">
+      <div class="contact-kicker">微信客服</div>
+      <h3>HSQBJ088888888</h3>
+      <p class="contact-copy">所罗门 GPT 自助充值与数字商品服务</p>
+      <p>添加时注明「Muse 部署」，并附上 Agent 的报错截图，方便快速定位是部署、导入还是调用环节的问题。</p>
+      <div class="contact-actions">
+        <button class="contact-action primary" type="button" data-copy-text="HSQBJ088888888">复制微信号</button>
+        <a class="contact-action" href="https://github.com/czg86389-hub/muse2api" target="_blank" rel="noreferrer">打开项目仓库</a>
+      </div>
+    </div>
+    <div class="contact-card reveal">
+      <div class="contact-kicker">相关入口</div>
+      <ul class="contact-list">
+        <li>
+          <div>
+            <strong>muse2api 开源仓库</strong>
+            <span>项目更新、Issue 反馈和文档都以官方仓库为准。</span>
+          </div>
+          <a class="contact-link" href="https://github.com/czg86389-hub/muse2api" target="_blank" rel="noreferrer">打开仓库 →</a>
+        </li>
+        <li>
+          <div>
+            <strong>LIONCC.AI 产品矩阵</strong>
+            <span>看完教程返回首页，继续使用其他 AI 工具与服务。</span>
+          </div>
+          <a class="contact-link" href="../index.html#products">返回首页 →</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<script src="../js/tutorial-guide.js"></script>
+</body>
+</html>
