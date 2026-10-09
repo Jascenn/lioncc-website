@@ -13,75 +13,96 @@
 html,body{height:100%}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-  background:#fafafa;color:#1a1a1a;
+  background:#ffffff;color:#111827;
   display:flex;align-items:center;justify-content:center;
   -webkit-font-smoothing:antialiased;
 }
 .wrap{
-  text-align:center;padding:48px 24px;max-width:560px;width:100%;
+  text-align:center;padding:48px 24px;max-width:600px;width:100%;
 }
+.logo{
+  display:inline-block;margin-bottom:32px;
+}
+.logo img{height:56px;width:auto;display:block}
 .code{
-  font-size:96px;font-weight:800;letter-spacing:-0.04em;
-  color:#1a1a1a;line-height:1;margin-bottom:8px;
+  font-size:128px;font-weight:900;letter-spacing:-0.05em;
+  color:#111827;line-height:1;margin-bottom:16px;
 }
 .title{
-  font-size:24px;font-weight:700;margin-bottom:12px;color:#1a1a1a;
+  font-size:30px;font-weight:800;margin-bottom:12px;color:#111827;
+  letter-spacing:-0.01em;
 }
 .desc{
-  font-size:15px;line-height:1.7;color:#6b6b6b;margin-bottom:32px;
+  font-size:16px;line-height:1.8;color:#6b7280;margin-bottom:36px;
 }
 .actions{
   display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
 }
 .btn{
   display:inline-flex;align-items:center;justify-content:center;
-  padding:11px 22px;border-radius:8px;
-  font-size:14px;font-weight:600;text-decoration:none;
-  transition:all .2s ease;min-height:44px;
+  padding:14px 30px;border-radius:12px;
+  font-size:16px;font-weight:700;text-decoration:none;
+  transition:all .3s ease;min-height:52px;
 }
-.btn-primary{background:#1a1a1a;color:#fff;}
-.btn-primary:hover{background:#333;}
-.btn-secondary{background:#fff;color:#1a1a1a;border:1px solid #d4d4d4;}
-.btn-secondary:hover{border-color:#9a9a9a;}
+.btn-primary{
+  background:#111827;color:#fff;
+  box-shadow:0 4px 8px rgba(0,0,0,.2);
+}
+.btn-primary:hover{transform:scale(1.02);background:#1f2937}
+.btn-secondary{
+  background:#fff;color:#111827;border:1px solid #e5e7eb;
+}
+.btn-secondary:hover{border-color:#111827}
 .brand{
-  margin-top:48px;font-size:12px;color:#9a9a9a;letter-spacing:0.04em;
+  margin-top:56px;font-size:12px;color:#9ca3af;letter-spacing:0.08em;
 }
-.brand a{color:inherit;text-decoration:none}
-.brand a:hover{color:#1a1a1a}
+.brand a{color:inherit;text-decoration:none;font-weight:700}
+.brand a:hover{color:#111827}
 /* 粘连网址识别面板 */
 .glued{
-  display:none;text-align:left;margin-top:32px;
-  border:1px solid #f0d9a8;background:#fffaf0;
-  border-radius:12px;padding:20px;
+  display:none;text-align:left;margin-top:36px;
+  border:1px solid #e5e7eb;background:#f9fafb;
+  border-radius:16px;padding:24px;
 }
 .glued.show{display:block}
-.glued h2{font-size:15px;font-weight:700;margin-bottom:8px;color:#1a1a1a}
-.glued p{font-size:13px;line-height:1.7;color:#6b6b6b;margin-bottom:12px}
+.glued h2{
+  font-size:16px;font-weight:800;color:#111827;margin-bottom:8px;
+}
+.glued p{
+  font-size:13px;line-height:1.7;color:#6b7280;margin-bottom:16px;
+}
 .glued .row{
   display:flex;align-items:center;gap:8px;
-  background:#fff;border:1px solid #e8e0cf;border-radius:8px;
-  padding:8px 10px;margin-bottom:8px;
+  background:#fff;border:1px solid #e5e7eb;border-radius:10px;
+  padding:10px 12px;margin-bottom:8px;
 }
 .glued .row:last-child{margin-bottom:0}
 .glued .url{
   flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#1a1a1a;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#111827;
 }
 .glued .mini{
-  flex-shrink:0;font-size:12px;font-weight:600;
-  padding:6px 10px;border-radius:6px;cursor:pointer;
-  border:1px solid #d4d4d4;background:#fff;color:#1a1a1a;text-decoration:none;
+  flex-shrink:0;font-size:12px;font-weight:700;
+  padding:8px 14px;border-radius:8px;cursor:pointer;
+  border:1px solid #e5e7eb;background:#fff;color:#111827;text-decoration:none;
+  transition:all .2s ease;
 }
-.glued .mini:hover{border-color:#9a9a9a}
-.glued .mini.go{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.glued .mini:hover{border-color:#111827}
+.glued .mini.go{background:#111827;color:#fff;border-color:#111827}
+.glued .mini.go:hover{background:#1f2937}
 @media (max-width:480px){
-  .code{font-size:72px}
-  .title{font-size:20px}
+  .code{font-size:88px}
+  .title{font-size:24px}
+  .logo img{height:44px}
+  .btn{padding:12px 24px;font-size:15px;min-height:48px}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <a class="logo" href="/" aria-label="LIONCC.AI 首页">
+    <img src="/images/banner.png" alt="LIONCC.AI">
+  </a>
   <div class="code">404</div>
   <h1 class="title">这个页面不存在</h1>
   <p class="desc">你访问的链接可能已被移动、删除，或地址输入有误。<br>回到首页继续浏览，或直接前往产品矩阵。</p>
