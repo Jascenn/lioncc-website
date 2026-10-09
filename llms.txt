@@ -1,25 +1,29 @@
-# LionCC
+# LIONCC.AI
 
-> LionCC 是一个 Claude Code API 中转与管理工具，帮助用户以更低成本使用 Claude Code。
+> LIONCC.AI 是 AIGC 与自动化工具生态站，为内容创作者和商业用户提供 AI 工具矩阵：自助订阅、自动交易交付、AI 创作工具与图文教程。
 
-## 关于
+## 产品矩阵
 
-LionCC 提供 Claude Code 拼车服务和 API 中转，支持多账号额度共享、CLI 配置工具（lioncc-cli），让个人开发者和团队以合理价格使用 Claude Max 能力。
+- 自助下单发卡网：数字产品自动化交易平台（API 额度、软件许可证），7x24 小时自助购买
+- ChatGPT 自助订阅：ChatGPT Plus 会员充值，双独立入口
+- ChatGPT 国内直连系统：国内直连 ChatGPT，界面与官方一致，账号数据同步
+- Sora-2 文生视频：AI 文生视频服务
+- AI 批量生图工具：多 API 并发调用、自动重试、进度追踪
+- LionKit · 创作工坊：AI 图像创作工坊
+- Gemini 多模态创作：故事板、图像编辑、视频概念图
+- Lioncc AI Lab：前沿技术孵化器（内测）
 
-## 关键页面
+## 教程
 
-- /：产品介绍与功能说明
-- /pricing：定价方案
-- /docs：使用文档与 CLI 配置指南
-
-## 主要功能
-
-- Claude Code API 中转（端点：vibecodingapi.ai）
-- 拼车服务：多人共享 Claude Max 额度
-- lioncc-cli：命令行配置工具，快速切换 API 端点
+- /pages/chatgpt-plus-guide.html：OpenAI & Claude 代充系统教程
+- /pages/gptplus-free-guide.html：ChatGPT 帐号充值系统教程
+- /pages/chatgpt-no-vpn-guide.html：ChatGPT 国内直连系统教程
+- /pages/muse2api-agent-guide.html：muse2api Agent 部署教程
+- /pages/tutorials.html：教程合集
+- /pages/updates.html：更新日志
 
 ## 作者
 
 凌一（Lingyi）开发维护。
-- 个人主页：https://lingyi.bio
+- 个人主页：https://lingyi.me
 - GitHub：https://github.com/Jascenn
