@@ -99,14 +99,15 @@ body{
 <script>
 (function(){
   // 识别地址栏里粘连在一起的多条网址（思路来源：@gefei55）
+  // 注意：浏览器/网关会把地址栏里的 // 压成 /，所以单斜杠和双斜杠都要认
   var raw = location.pathname + location.search + location.hash;
   var decoded = raw;
   try { decoded = decodeURIComponent(raw); } catch (e) {}
-  var matches = decoded.match(/https?:\/\/[^\s"'<>\]]+/gi) || [];
+  var matches = decoded.match(/https?:\/{1,2}(?:(?!https?:\/{1,2})[^\s"'<>\]])+/gi) || [];
   var seen = {};
   var urls = [];
   matches.forEach(function(u){
-    u = u.replace(/[.,;!?]+$/, '');
+    u = u.replace(/^(https?:\/)(?!\/)/i, '$1/').replace(/[.,;!?]+$/, '');
     if (!seen[u]) { seen[u] = 1; urls.push(u); }
   });
   if (urls.length < 2) return;
