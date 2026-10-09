@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2026-10-06] — 新增 muse2api 部署指南 🤖
 
-新增 muse2api Agent 部署指南与教程合集页，复制一条指令即可让 AI 自动部署；ChatGPT 免翻墙卡片支持多语言。
+新增 muse2api Agent 部署指南与教程合集页，复制一条指令即可让 AI 自动部署；ChatGPT 国内直连卡片支持多语言。
 
 ## [2026-09-11] — 卡片整理 🧹
 
@@ -30,9 +30,9 @@ All notable changes to this project will be documented in this file.
 
 教程视频接入 CDN 加速播放，指南补充飞书文档链接。
 
-## [2026-05-07] — 新增 ChatGPT 免翻墙教程 🛡️
+## [2026-05-07] — 新增 ChatGPT 国内直连教程 🛡️
 
-新增 ChatGPT 免翻墙系统教程页与产品卡片。
+新增 ChatGPT 国内直连系统教程页与产品卡片。
 
 ## [2026-04-27] — 全站中英双语 🌍
 
