@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>双服务器远程开发环境搭建教程 - LIONCC.AI</title>
+<meta name="description" content="LIONCC.AI 站内教程：用两台 OVH VPS 搭建隔离的远程 Claude Code 开发环境，新加坡跳板中转、本机零暴露，AI Agent 全程代劳。">
+<link rel="canonical" href="https://lioncc.ai/pages/dual-server-dev-guide.html">
+<meta property="og:url" content="https://lioncc.ai/pages/dual-server-dev-guide.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="LIONCC.AI">
+<meta property="og:title" content="双服务器远程开发环境搭建教程 - LIONCC.AI">
+<meta property="og:description" content="复制指令交给 AI Agent，用两台 VPS 搭出隔离的远程 Claude Code 开发环境：跳板中转、图形化操作、本机不留痕迹。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="双服务器远程开发环境搭建教程 - LIONCC.AI">
+<meta name="twitter:description" content="复制指令交给 AI Agent，用两台 VPS 搭出隔离的远程 Claude Code 开发环境：跳板中转、图形化操作、本机不留痕迹。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/tutorial-guide.css">
+<style>
+/* 本页定制：无图单列布局 + 提升可读性 */
+.agent-prompt{padding-top:52px !important}
+.agent-prompt .prompt-copy{top:9px !important;right:14px !important;background:#0a0a0a !important;border-width:1.5px !important;z-index:2 !important}
+@media(hover:hover){
+  .agent-prompt .prompt-copy{opacity:0 !important;transition:opacity .18s ease !important}
+  .agent-prompt:hover .prompt-copy,.agent-prompt:focus-within .prompt-copy{opacity:1 !important}
+}
+.step-card{grid-template-columns:60px 1fr}
+.step-body{padding:36px 44px;max-width:none}
+.step-body h3{font-size:24px;line-height:1.4}
+.step-body p{font-size:16px;line-height:1.85;max-width:760px}
+.step-body .step-note{font-size:14px;line-height:1.8;max-width:760px}
+.agent-prompt pre{font-size:14px;line-height:1.9}
+.arch-node{font-size:14px;padding:12px 20px}
+.section-title{font-size:44px}
+@media(max-width:768px){
+  .step-card{grid-template-columns:1fr}
+  .step-body{padding:24px 20px}
+  .step-body h3{font-size:20px}
+  .step-body p{font-size:15px}
+  .section-title{font-size:32px}
+  .agent-prompt{padding-top:22px !important}
+}
+.agent-prompt{position:relative;background:#050505;border:1px solid #1e1e1e;border-left:3px solid var(--accent);border-radius:14px;padding:22px 24px;margin:18px 0 8px;overflow:auto}
+.agent-prompt pre{font-family:var(--mono);font-size:13px;line-height:1.8;color:#d6ffe9;white-space:pre-wrap;word-break:break-word;margin:0}
+.prompt-copy{position:absolute;top:12px;right:12px;padding:7px 14px;border-radius:9px;border:1px solid rgba(16,163,127,.3);background:rgba(16,163,127,.12);color:var(--accent);font-size:12px;font-weight:700;cursor:pointer}
+.prompt-copy:hover{background:rgba(16,163,127,.2)}
+.inline-code{font-family:var(--mono);font-size:.92em;background:#111;border:1px solid #222;border-radius:6px;padding:2px 7px;color:#d6ffe9;word-break:break-all}
+.step-note{margin-top:10px;padding:10px 14px;border-radius:10px;background:rgba(255,214,10,.06);border:1px solid rgba(255,214,10,.18);font-size:13px;color:#e8d48a;line-height:1.7}
+.arch-flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0 6px;font-family:var(--mono);font-size:13px}
+.arch-node{padding:10px 16px;border-radius:10px;border:1px solid #262626;background:#0d0d0d;white-space:nowrap}
+.arch-node.hl{border-color:rgba(16,163,127,.4);color:var(--accent)}
+.arch-arrow{color:#555}
+@media(max-width:768px){
+  .agent-prompt{padding:16px 16px 14px}
+  .prompt-copy{position:static;display:block;width:100%;margin-bottom:12px}
+  .arch-flow{flex-direction:column;align-items:stretch}
+  .arch-arrow{transform:rotate(90deg);text-align:center}
+}
+</style>
+<script src="../js/i18n.js" defer></script>
+</head>
+<body>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+<header class="hero">
+  <div class="hero-eyebrow">LIONCC.AI · Agent 实战教程</div>
+  <h1 class="hero-title">双服务器<br><em>远程开发</em><br>搭建指南</h1>
+  <p class="hero-desc">让 Claude Code 跑在海外服务器上，你的电脑只当遥控器。复制指令发给 AI Agent，它替你完成全部命令行操作；你只负责买服务器、登录账号、点几次浏览器。</p>
+  <div class="hero-chips">
+    <div class="chip-dot"></div>
+    <div class="hero-chip"><span class="chip-dot green"></span>2～3 小时搭完</div>
+    <div class="hero-chip"><span class="chip-dot blue"></span>约 $12/月</div>
+    <div class="hero-chip"><span class="chip-dot yellow"></span>本机零暴露</div>
+  </div>
+  <div class="hero-actions">
+    <a class="hero-action" href="#prep-section">开始前准备什么</a>
+    <a class="hero-action" href="#steps">查看 8 步流程</a>
+    <a class="hero-action" href="#faq-guide">常见问题</a>
+  </div>
+</header>
+
+<nav class="page-nav" aria-label="页内导航">
+  <div class="page-nav-inner">
+    <a class="page-nav-link" href="#prep-section">
+      <div class="page-nav-copy"><span class="page-nav-label">开始前</span><span class="page-nav-meta">5 样东西</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+    <a class="page-nav-link" href="#steps">
+      <div class="page-nav-copy"><span class="page-nav-label">8 步流程</span><span class="page-nav-meta">复制指令交给 Agent</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+    <a class="page-nav-link" href="#daily-use">
+      <div class="page-nav-copy"><span class="page-nav-label">搭完之后</span><span class="page-nav-meta">日常怎么用</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+    <a class="page-nav-link" href="#faq-guide">
+      <div class="page-nav-copy"><span class="page-nav-label">常见问题</span><span class="page-nav-meta">先看再动手</span></div>
+      <span class="page-nav-arrow">→</span>
+    </a>
+  </div>
+  <div class="page-nav-oneliner" style="max-width:1080px;margin:18px auto 0;padding:16px 22px;border:1px solid rgba(16,163,127,.25);background:rgba(16,163,127,.06);border-radius:14px;font-size:14.5px;line-height:1.8">
+    <b style="color:var(--accent)">最省事的做法：</b>直接把本页网址发给你的 AI Agent，说「<b>按这个教程帮我从零搭好，需要我操作时提醒我</b>」——Agent 会读完全文、按 8 步执行、每步汇报，你只负责它停下来时点几下浏览器。网址：<span style="font-family:var(--mono);font-size:13px">https://lioncc.ai/pages/dual-server-dev-guide.html</span>
+  </div>
+</nav>
+
+<section class="resources">
+  <div class="resources-head">
+    <div class="resources-copy">
+      <div class="resources-kicker">这套环境的思路</div>
+      <p class="resources-desc">Claude Code 直接装在本地又吃电量又受网络限制。这套方案把 AI 搬到海外服务器上：本地只发指令，干活全在云端，代码用 git 同步。两台服务器分工明确——一台只管中转、一台专心干活，干活那台不暴露给任何第三方。</p>
+    </div>
+  </div>
+  <div class="resources-inner">
+    <a href="https://www.ovhcloud.com/zh-cn/" target="_blank" rel="noreferrer" class="res-card">
+      <div class="res-icon">☁️</div>
+      <div class="res-body">
+        <div class="res-title">OVHcloud 官网</div>
+        <div class="res-url">买两台 VPS 的地方，约 $5.35/月·台</div>
+      </div>
+      <div class="res-arrow">→</div>
+    </a>
+    <a href="https://paseo.sh" target="_blank" rel="noreferrer" class="res-card">
+      <div class="res-icon">🖥️</div>
+      <div class="res-body">
+        <div class="res-title">Paseo 官网</div>
+        <div class="res-url">服务器上的图形化操作界面</div>
+      </div>
+      <div class="res-arrow">→</div>
+    </a>
+    <a href="#steps" class="res-card">
+      <div class="res-icon">🤖</div>
+      <div class="res-body">
+        <div class="res-title">8 步搭建流程</div>
+        <div class="res-url">每一步都给了可复制的 Agent 指令</div>
+      </div>
+      <div class="res-arrow">→</div>
+    </a>
+  </div>
+  <div class="resources-back">
+    <a href="tutorials.html" class="resources-back-link">← 返回 LIONCC.AI / 教程合集</a>
+  </div>
+</section>
+
+<section class="prep-section" id="prep-section">
+  <div class="section-label">开始前</div>
+  <h2 class="section-title">先准备这<span>五样</span></h2>
+  <div class="prep-grid">
+    <div class="prep-card">
+      <div class="prep-step">01</div>
+      <h3>一个 AI Agent</h3>
+      <p>Codex、ChatGPT 桌面版等能在你电脑终端里跑命令的都行。整个搭建 80% 的命令由它执行，你只负责复制粘贴。</p>
+    </div>
+    <div class="prep-card">
+      <div class="prep-step">02</div>
+      <h3>OVHcloud 账号</h3>
+      <p><span class="inline-code">ovhcloud.com</span> 注册。注意：税务居民国家没有中国大陆，选 Hong Kong 等；要真实电话号码；绑一张能付美元的信用卡。</p>
+    </div>
+    <div class="prep-card">
+      <div class="prep-step">03</div>
+      <h3>两台 VPS 的预算</h3>
+      <p>VPS-1 档位（2核4G）够用，一台约 $5.35/月+税，两台合计约 $12/月。一台选新加坡，一台选加拿大。</p>
+    </div>
+    <div class="prep-card">
+      <div class="prep-step">04</div>
+    <h3>本地代理与出海口</h3>
+    <p>Clash / Surge / mihomo 均可，确认本机有 SOCKS 端口（以 7891 为例）。建议备一个<b>静态 ISP 节点</b>（如 cliproxy.com）作链式出海口，已有就不用再买。</p>
+    </div>
+    <div class="prep-card">
+      <div class="prep-step">05</div>
+      <h3>Claude 账号</h3>
+      <p>能正常登录 Claude 的自用账号。环境搭好后要在服务器上完成一次授权。</p>
+    </div>
+  </div>
+</section>
+
+<main class="steps-section" id="steps">
+  <div class="section-label">搭建流程</div>
+  <h2 class="section-title">8 步，从买服务器<span>到开工</span></h2>
+
+  <div class="arch-flow">
+    <span class="arch-node">你的 Mac</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-node hl">本地代理 :7891</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-node">新加坡跳板</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-node hl">加拿大开发机</span>
+  </div>
+  <p class="resources-desc" style="text-align:center;max-width:680px;margin:0 auto 8px">干活的服务器只认跳板的 IP，本机不留任何痕迹；SSH 和图形界面都从这条链路走。</p>
+
+  <div class="step-card reveal" data-delay="0" style="grid-template-columns:60px 1fr">
+    <div class="step-num">GO</div>
+    <div class="step-body">
+      <h3>一键指令：整包发给 Agent</h3>
+      <p>不想分 8 次复制？把下面这段一次发给 Agent（配合上面的网址更佳，Agent 会边读边做）。它执行到需要你人工的环节（付款、OVH 重装、Claude 授权）会主动停下等你。</p>
+      <div class="agent-prompt">
+        <button class="prompt-copy" type="button" data-copy-text="请打开 https://lioncc.ai/pages/dual-server-dev-guide.html 阅读全文，然后按教程的 8 个步骤帮我搭建双服务器远程开发环境：
+- 每一步先说明你要做什么，命令行操作直接执行，需要我浏览器操作的（OVH 下单付款、Reinstall 注入公钥、Claude 授权）停下来等我完成；
+- 我的两台服务器 IP 是：<SG_IP>（新加坡）、<CA_IP>（加拿大），如果我还没买就提醒我买；
+- 每步完成后做教程里写的验证，把结果告诉我，全部通过再进入下一步；
+- 中途任何报错先自己排查修复，修复不了再问我。">复制整包指令</button>
+        <pre>请打开 https://lioncc.ai/pages/dual-server-dev-guide.html 阅读全文，然后按教程的 8 个步骤帮我搭建双服务器远程开发环境：
+- 每一步先说明你要做什么，命令行操作直接执行，需要我浏览器操作的（OVH 下单付款、Reinstall 注入公钥、Claude 授权）停下来等我完成；
+- 我的两台服务器 IP 是：&lt;SG_IP&gt;（新加坡）、&lt;CA_IP&gt;（加拿大），如果我还没买就提醒我买；
+- 每步完成后做教程里写的验证，把结果告诉我，全部通过再进入下一步；
+- 中途任何报错先自己排查修复，修复不了再问我。</pre>
+      </div>
+    </div>
+  </div>
+  <div class="step-card reveal" data-delay="30">
+    <div class="step-num">01</div>
+    <div class="step-body">
+      <h3>买好两台服务器（浏览器操作，约 20 分钟）</h3>
+      <p>登录 OVH Manager → Bare Metal Cloud → IP (vps) → Order。第一台选 <b>Singapore (SGP)</b>，第二台选 <b>Canada (BHS)</b>，都选 VPS-1 档位、月付。付款后等状态变 Active，记下两个公网 IP。</p>
+      <div class="step-note">付款失败会生成「未付款订单」，别重新下单，对旧订单再次付款即可。</div>
+    </div>
+  </div>
+
+  <div class="step-card reveal" data-delay="30">
+    <div class="step-num">02</div>
+    <div class="step-body">
+      <h3>生成密钥并重装系统（发指令，约 30 分钟）</h3>
+      <p>把下面指令发给 Agent（两个 IP 换成你的）：</p>
+      <div class="agent-prompt">
+        <button class="prompt-copy" type="button" data-copy-text="请帮我完成两台新 VPS 的 SSH 密钥准备，要求：
+1. 在我本机生成 ed25519 密钥对 ~/.ssh/cc_vps_init（无密码短语）；
+2. 显示公钥内容，我要粘到 OVH 重装向导里；
+3. 整理两台机器的信息清单（IP、用途、后续步骤）成表格。">复制指令</button>
+        <pre>请帮我完成两台新 VPS 的 SSH 密钥准备，要求：
+1. 在我本机生成 ed25519 密钥对 ~/.ssh/cc_vps_init（无密码短语）；
+2. 显示公钥内容，我要粘到 OVH 重装向导里；
+3. 整理两台机器的信息清单（IP、用途、后续步骤）成表格。</pre>
+      </div>
+      <p style="margin-top:12px">然后你本人操作：OVH Manager 里分别对两台机器 Reinstall，系统选 <b>Ubuntu 26.04</b>，重装向导的 SSH Key 步骤把 Agent 给的公钥粘进去，等两台都变 Active。</p>
+    </div>
+  </div>
+
+  <div class="step-card reveal" data-delay="60">
+    <div class="step-num">03</div>
+    <div class="step-body">
+      <h3>初始化跳板机（发指令，约 15 分钟）</h3>
+      <div class="agent-prompt">
+        <button class="prompt-copy" type="button" data-copy-text="请帮我初始化新加坡跳板机 <SG_IP>，通过 ssh ubuntu@<SG_IP> 执行（用 cc_vps_init 密钥），完成：
+1. 系统更新到最新；
+2. ufw 防火墙：默认拒绝入站，只放行 22/tcp；
+3. SSH 加固：只允许公钥认证，禁止 root 登录、禁止密码登录、禁止 agent 转发；
+4. 每日自动安全更新，不自动重启；
+5. 完成后逐一验证并汇报。">复制指令</button>
+        <pre>请帮我初始化新加坡跳板机 &lt;SG_IP&gt;，通过 ssh ubuntu@&lt;SG_IP&gt; 执行（用 cc_vps_init 密钥），完成：
+1. 系统更新到最新；
+2. ufw 防火墙：默认拒绝入站，只放行 22/tcp；
+3. SSH 加固：只允许公钥认证，禁止 root 登录、禁止密码登录、禁止 agent 转发；
+4. 每日自动安全更新，不自动重启；
+5. 完成后逐一验证并汇报。</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card reveal" data-delay="90">
+    <div class="step-num">04</div>
+    <div class="step-body">
+      <h3>初始化开发机（发指令，约 20 分钟）</h3>
+      <p>注意这台必须经跳板访问（<span class="inline-code">ssh -J</span>）：</p>
+      <div class="agent-prompt">
+        <button class="prompt-copy" type="button" data-copy-text="请帮我初始化加拿大开发机 <CA_IP>（必须经跳板：ssh -J ubuntu@<SG_IP> ubuntu@<CA_IP>），完成：
+1. 系统更新；2G swap（swappiness=10）；
+2. ufw：默认拒绝入站，仅放行来自 <SG_IP> 的 22/tcp；
+3. SSH 加固：仅公钥认证、禁 root 禁密码，AllowUsers 限制 ubuntu 只能来自 <SG_IP>；
+4. 安装 Node.js 24 LTS、Git、tmux、Claude Code（npm i -g @anthropic-ai/claude-code）；
+5. 创建 ~/projects 目录；
+6. 完成后经跳板实测 claude --version、node -v 并汇报。">复制指令</button>
+        <pre>请帮我初始化加拿大开发机 &lt;CA_IP&gt;（必须经跳板：ssh -J ubuntu@&lt;SG_IP&gt; ubuntu@&lt;CA_IP&gt;），完成：
+1. 系统更新；2G swap（swappiness=10）；
+2. ufw：默认拒绝入站，仅放行来自 &lt;SG_IP&gt; 的 22/tcp；
+3. SSH 加固：仅公钥认证、禁 root 禁密码，AllowUsers 限制 ubuntu 只能来自 &lt;SG_IP&gt;；
+4. 安装 Node.js 24 LTS、Git、tmux、Claude Code（npm i -g @anthropic-ai/claude-code）；
+5. 创建 ~/projects 目录；
+6. 完成后经跳板实测 claude --version、node -v 并汇报。</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card reveal" data-delay="120">
+    <div class="step-num">05</div>
+    <div class="step-body">
+      <h3>配置本机链式代理 + SSH（发指令，约 10 分钟）</h3>
+      <p><b>先确认本地链式代理</b>：代理软件开着、<span class="inline-code">127.0.0.1:7891</span> 可用、出海域名走第二层静态 ISP 节点（不要直连 OVH）。不确定就把这句发给 Agent：「检查本地代理是否具备链式出海口，确认 7891 是 SOCKS5 可用端口、出海走第二层节点，不要连接任何服务器」。</p>
+      <p><b>再配置 SSH 隔离</b>——这一步是整套方案的核心：本机只认识跳板，干活机器的密钥只存在跳板上。</p>
+      <div class="agent-prompt">
+        <button class="prompt-copy" type="button" data-copy-text="请帮我配置本机 SSH，规则（重要）：
+1. 生成新密钥 ~/.ssh/cc_sg_ed25519 专用于跳板，公钥追加到跳板 authorized_keys；
+2. ~/.ssh/config 写入：
+   Host cc-jump
+     HostName <SG_IP>
+     User ubuntu
+     IdentityFile ~/.ssh/cc_sg_ed25519
+     IdentitiesOnly yes
+     ForwardAgent no
+     ProxyCommand /usr/bin/nc -X 5 -x 127.0.0.1:7891 %h %p
+   （端口 7891 换成我实际 SOCKS 端口）
+3. 本机不写任何开发机配置、不保存开发机密钥；
+4. 跳板上生成一把新密钥 ~/.ssh/cc_dev_key（不拷贝到我本机），公钥追加到开发机 authorized_keys 并加前缀 from=&quot;<SG_IP>&quot;；
+5. 跳板 ~/.ssh/config 写入 Host cc-dev 段（HostName <CA_IP> / User ubuntu / IdentityFile ~/.ssh/cc_dev_key / IdentitiesOnly yes）；
+6. 验证：ssh cc-jump 通；ssh cc-jump -- ssh cc-dev 'echo DEV_OK' 通；
+7. 最后检查我本机 ~/.ssh/config 里只有 cc-jump。">复制指令</button>
+        <pre>请帮我配置本机 SSH，规则（重要）：
+1. 生成新密钥 ~/.ssh/cc_sg_ed25519 专用于跳板，公钥追加到跳板 authorized_keys；
+2. ~/.ssh/config 写入：
+   Host cc-jump
+     HostName &lt;SG_IP&gt;
+     User ubuntu
+     IdentityFile ~/.ssh/cc_sg_ed25519
+     IdentitiesOnly yes
+     ForwardAgent no
+     ProxyCommand /usr/bin/nc -X 5 -x 127.0.0.1:7891 %h %p
+   （端口 7891 换成我实际 SOCKS 端口）
+3. 本机不写任何开发机配置、不保存开发机密钥；
+4. 跳板上生成一把新密钥 ~/.ssh/cc_dev_key（不拷贝到我本机），公钥追加到开发机 authorized_keys 并加前缀 from="&lt;SG_IP&gt;"；
+5. 跳板 ~/.ssh/config 写入 Host cc-dev 段（HostName &lt;CA_IP&gt; / User ubuntu / IdentityFile ~/.ssh/cc_dev_key / IdentitiesOnly yes）；
+6. 验证：ssh cc-jump 通；ssh cc-jump -- ssh cc-dev 'echo DEV_OK' 通；
+7. 最后检查我本机 ~/.ssh/config 里只有 cc-jump。</pre>
+      </div>
+      <p style="margin-top:12px">做完的验证标准：本机终端输入 <span class="inline-code">ssh -t cc-jump ssh cc-dev</span> 能进入开发机。</p>
+    </div>
+  </div>
+
+  <div class="step-card reveal" data-delay="150">
+    <div class="step-num">06</div>
+    <div class="step-body">
+      <h3>搭 Paseo 图形界面（发指令，约 20 分钟）</h3>
+      <div class="agent-prompt">
+        <button class="prompt-copy" type="button" data-copy-text="请继续配置（全部经 ssh cc-jump -- ssh cc-dev '...' 执行）：
+1. 开发机安装 Paseo：sudo npm install -g @getpaseo/cli，报 install-scripts 警告就 npm rebuild -g @getpaseo/cli；
+2. 创建 systemd 服务 /etc/systemd/system/paseo-remote.service：User=ubuntu，ExecStart=/usr/bin/paseo daemon run（必须是 daemon run，不能用 daemon start），enable 并启动；
+3. 开启 Web UI：paseo daemon config set features.webUi.enabled true，重启服务；
+4. 确认 daemon 只监听 127.0.0.1:6767（ss -tln 检查），relay 保持关闭；
+5. 验证 curl http://127.0.0.1:6767/api/health 返回 ok。">复制指令</button>
+        <pre>请继续配置（全部经 ssh cc-jump -- ssh cc-dev '...' 执行）：
+1. 开发机安装 Paseo：sudo npm install -g @getpaseo/cli，报 install-scripts 警告就 npm rebuild -g @getpaseo/cli；
+2. 创建 systemd 服务 /etc/systemd/system/paseo-remote.service：User=ubuntu，ExecStart=/usr/bin/paseo daemon run（必须是 daemon run，不能用 daemon start），enable 并启动；
+3. 开启 Web UI：paseo daemon config set features.webUi.enabled true，重启服务；
+4. 确认 daemon 只监听 127.0.0.1:6767（ss -tln 检查），relay 保持关闭；
+5. 验证 curl http://127.0.0.1:6767/api/health 返回 ok。</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card reveal" data-delay="180">
+    <div class="step-num">07</div>
+    <div class="step-body">
+      <h3>打通两段访问隧道（发指令，约 15 分钟）</h3>
+      <div class="agent-prompt">
+        <button class="prompt-copy" type="button" data-copy-text="请配置 Paseo 的两段访问隧道：
+1. 跳板上：修改 /etc/ssh/sshd_config.d/ 下的 PermitOpen 为单行三目标：
+   PermitOpen <CA_IP>:22 127.0.0.1:17677 127.0.0.1:3000
+   （必须写在一行，多行只有最后一行生效），sshd -t 后 reload；
+2. 跳板上：创建 systemd 服务 cc-tunnel-dev.service：
+   ExecStart=/usr/bin/ssh -N -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o BatchMode=yes -L 127.0.0.1:17677:127.0.0.1:6767 -L 127.0.0.1:3000:127.0.0.1:3000 cc-dev
+   enable 并启动，确认跳板上 17677/3000 在监听；
+3. 我本机：创建 launchd 服务 ~/Library/LaunchAgents/com.jascen.cc-tunnel-jump.plist，
+   转发 127.0.0.1:17677 → 跳板 127.0.0.1:17677，RunAtLoad + KeepAlive，加载并确认进程存在；
+4. 最终验证：curl http://127.0.0.1:17677/ 返回 200 且页面标题是 Paseo。">复制指令</button>
+        <pre>请配置 Paseo 的两段访问隧道：
+1. 跳板上：修改 /etc/ssh/sshd_config.d/ 下的 PermitOpen 为单行三目标：
+   PermitOpen &lt;CA_IP&gt;:22 127.0.0.1:17677 127.0.0.1:3000
+   （必须写在一行，多行只有最后一行生效），sshd -t 后 reload；
+2. 跳板上：创建 systemd 服务 cc-tunnel-dev.service：
+   ExecStart=/usr/bin/ssh -N -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o BatchMode=yes -L 127.0.0.1:17677:127.0.0.1:6767 -L 127.0.0.1:3000:127.0.0.1:3000 cc-dev
+   enable 并启动，确认跳板上 17677/3000 在监听；
+3. 我本机：创建 launchd 服务 ~/Library/LaunchAgents/com.jascen.cc-tunnel-jump.plist，
+   转发 127.0.0.1:17677 → 跳板 127.0.0.1:17677，RunAtLoad + KeepAlive，加载并确认进程存在；
+4. 最终验证：curl http://127.0.0.1:17677/ 返回 200 且页面标题是 Paseo。</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card reveal" data-delay="210">
+    <div class="step-num">08</div>
+    <div class="step-body">
+      <h3>验收 + Claude 授权（人工，约 15 分钟）</h3>
+      <p>浏览器打开 <span class="inline-code">http://127.0.0.1:17677</span>，能看到 Paseo 界面就是成功。Claude 授权必须你本人做：让 Agent 帮你进开发机交互终端运行 <span class="inline-code">claude</span>，它给你一个授权链接后，<b>把链接复制到本地浏览器打开</b>——注意确认此时浏览器流量走的是你的链式出海口（静态 ISP 节点），Claude 看到的登录 IP 就是出海口而不是你的真实网络。登录完成、终端里出现授权成功提示后，在 Paseo 里发一条真实消息验证。</p>
+      <div class="step-note">验证出海口是否生效：浏览器打开 ip.me，显示的应该是静态 ISP 节点的 IP 而不是你家宽 IP，再去点授权链接。</div>
+    </div>
+  </div>
+
+  <div class="summary reveal">
+    <div class="summary-icon">✓</div>
+    <h2>搭建完成</h2>
+    <p>你的日常变成了：开网页（图形界面）或一条命令（终端），AI 在海外替你干活。本机不留任何开发机痕迹，代码每天 push 就永远不丢。</p>
+    <div class="summary-actions">
+      <a class="summary-action primary" href="http://127.0.0.1:17677" target="_blank" rel="noreferrer">打开 Paseo 界面</a>
+      <a class="summary-action" href="tutorials.html">返回教程合集</a>
+    </div>
+  </div>
+</main>
+
+<section class="faq-section" id="daily-use">
+  <div class="section-label">搭完之后</div>
+  <h2 class="section-title">日常<span>怎么用</span></h2>
+  <div class="faq-grid">
+    <div class="faq-card">
+      <h3>终端方式（最常用）</h3>
+      <p>进开发机：<span class="inline-code">ssh -t cc-jump ssh cc-dev</span>；跑单条命令：<span class="inline-code">ssh cc-jump -- ssh cc-dev '命令'</span>。建议在 <span class="inline-code">~/.zshrc</span> 加一行 <span class="inline-code">alias ccdev='ssh -t cc-jump ssh cc-dev'</span>，以后一条命令直达。</p>
+    </div>
+    <div class="faq-card">
+      <h3>图形界面方式</h3>
+      <p>隧道配好后浏览器打开 <span class="inline-code">http://127.0.0.1:17677</span> 就是开发机的操作界面：管文件、开终端、跑 AI 都可以。想要更彻底的按需隔离，可以把常驻隧道换成临时命令 <span class="inline-code">ssh -N -L 17677:127.0.0.1:17677 cc-jump</span>，用完 Ctrl+C 关闭。</p>
+    </div>
+    <div class="faq-card">
+      <h3>长任务与代码安全</h3>
+      <p>进服务器先 <span class="inline-code">tmux new -As work</span> 再干活，断线后重连输入同样命令回到现场，任务不丢。代码每天 <span class="inline-code">git push</span>——没 push 的内容服务器坏了就没了。</p>
+    </div>
+    <div class="faq-card">
+      <h3>传文件</h3>
+      <p>两跳中转：先 <span class="inline-code">scp ./文件 cc-jump:/tmp/</span>，再 <span class="inline-code">ssh cc-jump -- 'scp /tmp/文件 cc-dev:~/projects/'</span>。方向反过来就是下载。嫌麻烦把这两段发给 Agent 让它代办。</p>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq-guide">
+  <div class="section-label">常见问题</div>
+  <h2 class="section-title">操作中常见的<span>几个问题</span></h2>
+  <div class="faq-grid">
+    <div class="faq-card">
+      <h3>ssh 报 7891 端口被拒</h3>
+      <p>本地代理没开。这是最常见的问题：打开代理软件再试。所有 SSH 连接都走这个端口，它不通后面全不通。</p>
+    </div>
+    <div class="faq-card">
+      <h3>ssh 卡住报 banner exchange 超时</h3>
+      <p>直连海外服务器被线路干扰了，正常现象。确认 SSH 配置里有 <span class="inline-code">ProxyCommand ... 7891</span> 那一行（第 5 步已包含），走代理就没事。</p>
+    </div>
+    <div class="faq-card">
+      <h3>Paseo 页面打不开</h3>
+      <p>三层隧道有一层断了。把这句发给 Agent：「Paseo 打不开了，按顺序检查：本机 launchctl 里 cc-tunnel 是否在跑 → 跳板 cc-tunnel-dev 服务是否 active → 开发机 paseo-remote 是否 active，修复后 curl 验证 17677 返回 200」。</p>
+    </div>
+    <div class="faq-card">
+      <h3>Permission denied (publickey)</h3>
+      <p>密钥没配对。交给 Agent：「我的 ssh 被拒了，先 ssh -v 看哪把密钥被拒，再核对服务器上 authorized_keys，修复后验证」。</p>
+    </div>
+    <div class="faq-card">
+      <h3>断线了任务会丢吗</h3>
+      <p>tmux 里跑的不会丢，重连后 <span class="inline-code">tmux attach</span> 回到现场；裸终端跑的会随断线丢失。养成进服务器先开 tmux 的习惯。</p>
+    </div>
+    <div class="faq-card">
+      <h3>能把 IP 或密钥发给别人吗</h3>
+      <p>IP 可以给可信的人（还有防火墙挡着），<b>任何私钥文件都不能给</b>。多人使用时每人单独配一把密钥，不要共享。本教程的隔离模型是「只有你能连」，共享密钥会破坏它。</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="support-contact">
+  <div class="section-label">联系支持</div>
+  <h2 class="section-title">需要人工协助时<span>直接联系</span></h2>
+  <div class="contact-grid">
+    <div class="contact-card primary reveal">
+      <div class="contact-kicker">微信客服</div>
+      <h3>HSQBJ088888888</h3>
+      <p class="contact-copy">所罗门 GPT 自助充值与数字商品服务</p>
+      <p>添加时注明「双服务器搭建」，并附上 Agent 的报错截图，方便快速定位是哪一步的问题。</p>
+      <div class="contact-actions">
+        <button class="contact-action primary" type="button" data-copy-text="HSQBJ088888888">复制微信号</button>
+        <a class="contact-action" href="https://www.ovhcloud.com/zh-cn/" target="_blank" rel="noreferrer">打开 OVHcloud</a>
+      </div>
+    </div>
+    <div class="contact-card reveal">
+      <div class="contact-kicker">相关入口</div>
+      <ul class="contact-list">
+        <li>
+          <div>
+            <strong>Paseo 官方文档</strong>
+            <span>图形界面的连接方式与常见问题以官方文档为准。</span>
+          </div>
+          <a class="contact-link" href="https://paseo.sh/docs" target="_blank" rel="noreferrer">打开文档 →</a>
+        </li>
+        <li>
+          <div>
+            <strong>LIONCC.AI 教程合集</strong>
+            <span>看完这篇返回教程列表，继续其他实战内容。</span>
+          </div>
+          <a class="contact-link" href="tutorials.html">返回合集 →</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<script src="../js/tutorial-guide.js"></script>
+</body>
+</html>
