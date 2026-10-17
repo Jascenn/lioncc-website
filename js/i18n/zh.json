@@ -240,5 +240,13 @@
   "tutorials.desc.chatgptPlus": "通过卡密兑换与充值密钥验证流程，为 ChatGPT Plus 帐号完成订阅充值。页面同时提供视频演示和完整图文步骤，适合第一次操作时对照使用。",
   "tutorials.desc.claude": "通过卡密兑换与 sessionKey 验证流程，为 Claude 帐号完成订阅充值。页面提供完整的图文步骤，覆盖 F12 手动和浏览器扩展两种 Token 获取方式，适合第一次操作时对照使用。",
   "tutorials.desc.gptplusFree": "通过卡密兑换与 Token 验证流程，为 ChatGPT 帐号完成订阅充值。页面同时提供视频演示和完整图文步骤，适合第一次操作时对照使用。",
-  "tutorials.eyebrow": "LIONCC.AI · 站内教程"
+  "tutorials.eyebrow": "LIONCC.AI · 站内教程",
+  "grok.badge": "新教程",
+  "grok.hint": "先确认该账号是否支持 Grok Bot，避免充值时覆盖已有账户权益。",
+  "grok.steps": "查询卡密 → 验证 Session → 确认充值",
+  "productNames.grokBot": "Grok Bot 充值",
+  "productDescriptions.grokBot": "先登录 Grok 账号并确认该账号是否支持 Grok Bot，避免充值时覆盖已有账户权益；确认无误后，再通过卡密和 Session JSON 完成 SuperGrok 充值。",
+  "tags.grok": "#Grok",
+  "tags.session": "#Session 验证",
+  "tags.supergrok": "#SuperGrok"
 }
