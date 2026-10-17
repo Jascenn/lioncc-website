@@ -240,5 +240,13 @@
   "tutorials.desc.chatgptPlus": "Top up a ChatGPT Plus subscription via card-code redemption and Token verification. Both video walkthrough and full illustrated steps are provided — handy for first-time use.",
   "tutorials.desc.claude": "Top up a Claude subscription via card-code redemption and sessionKey verification. Full illustrated steps cover both manual F12 and browser-extension token retrieval — handy for first-time use.",
   "tutorials.desc.gptplusFree": "Top up a ChatGPT account via card-code redemption and Token verification. Both video walkthrough and full illustrated steps are provided — handy for first-time use.",
-  "tutorials.eyebrow": "LIONCC.AI · Tutorial"
+  "tutorials.eyebrow": "LIONCC.AI · Tutorial",
+  "grok.badge": "New Guide",
+  "grok.hint": "Confirm that the account supports Grok Bot before recharging to avoid overwriting existing account benefits.",
+  "grok.steps": "Check card → Verify Session → Confirm recharge",
+  "productNames.grokBot": "Grok Bot Recharge",
+  "productDescriptions.grokBot": "Log in to Grok and confirm that the account supports Grok Bot to avoid overwriting existing account benefits. Then use a card code and Session JSON to recharge SuperGrok.",
+  "tags.grok": "#Grok",
+  "tags.session": "#Session Verification",
+  "tags.supergrok": "#SuperGrok"
 }
