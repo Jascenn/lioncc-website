@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- Add a pull-request template with localization, deployment and rollback checks.
+- Add baseline repository hygiene files and dependency update checks.
+
 All notable changes to this project will be documented in this file.
 
 ## [2026-10-12] — 新增双服务器远程开发教程 🖥️
