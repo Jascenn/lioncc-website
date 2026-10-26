@@ -45,3 +45,9 @@ git config core.hooksPath .githooks      # 启用 pre-commit 自动 build hook
 ---
 
 © 2025-2026 LIONCC.AI 版权所有
+
+源码采用 [PolyForm Noncommercial License 1.0.0](LICENSE)：允许个人学习、研究、
+实验和非商业项目使用；未经授权不得用于商业目的。
+
+提交约定见 [CONTRIBUTING.md](CONTRIBUTING.md)；安全问题按
+[SECURITY.md](SECURITY.md) 私下报告。
