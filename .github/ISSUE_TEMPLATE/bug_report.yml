@@ -1,0 +1,66 @@
+name: Bug report
+description: Report a public-site, tutorial, localization, or deployment issue
+title: "fix: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include credentials, payment details, customer records, or private
+        invitation links. Report security issues through SECURITY.md.
+  - type: input
+    id: url
+    attributes:
+      label: Page URL
+      placeholder: "https://lioncc.ai/pages/..."
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Area
+      options:
+        - Public page or navigation
+        - Tutorial content
+        - Chinese or English localization
+        - Mobile layout
+        - GitHub Pages deployment
+        - SEO, sitemap, or robots
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should happen
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Redacted screenshots or logs
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Safety checks
+      options:
+        - label: I removed credentials, customer data, and private links.
+          required: true
+        - label: I checked whether this is already a private security report.
+          required: true
+        - label: I identified whether the issue is desktop, mobile, or both.
+          required: true

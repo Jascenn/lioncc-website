@@ -1,0 +1,13 @@
+# Default owner for all changes.
+* @Jascenn
+
+# Production publication and domain configuration require explicit review.
+/CNAME @Jascenn
+/.github/workflows/ @Jascenn
+
+# SEO, localization, and public content are reviewed together.
+/index.html @Jascenn
+/pages/ @Jascenn
+/js/i18n/ @Jascenn
+/sitemap.xml @Jascenn
+/robots.txt @Jascenn

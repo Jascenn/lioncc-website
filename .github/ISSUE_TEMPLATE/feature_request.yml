@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a product, content, or repository improvement
+title: "feat: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Production and localization impact
+      description: Note deployment, SEO, bilingual content, mobile layout, and media impact.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submit checks
+      options:
+        - label: I searched existing issues and pull requests.
+          required: true
+        - label: I did not include private customer data or credentials.
+          required: true
