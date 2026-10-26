@@ -4,6 +4,8 @@
 
 ### Added
 
+- Add a PolyForm Noncommercial 1.0.0 source license.
+- Add contribution and security guidance, issue forms, and a CODEOWNERS map.
 - Add a pull-request template with localization, deployment and rollback checks.
 - Add baseline repository hygiene files and dependency update checks.
 
