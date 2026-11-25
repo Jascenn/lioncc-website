@@ -20,16 +20,15 @@ const subscriptionOptions = [
 		accent: 'emerald',
 		eyebrowKey: 'subscription.chatgptplus.eyebrow',
 		titleKey: 'subscription.chatgptplus.title',
-		domain: 'subcheap.free',
+		domain: 'ios.subcheap.free',
 		descriptionKey: 'subscription.chatgptplus.description',
 		tagKeys: ['tags.independentBackend', 'tags.tutorial'],
-		maintenance: true,
 		facts: [
 			{ labelKey: 'subscription.factScenario', valueKey: 'subscription.scenarioPlus' },
 			{ labelKey: 'subscription.factCardSample', valueRaw: 'Y2DD****O7Y8****' },
 			{ labelKey: 'subscription.factThreeSteps', valueKey: 'chatgpt.steps' },
 		],
-		primaryHref: 'https://subcheap.free',
+		primaryHref: 'https://ios.subcheap.free/',
 		secondaryHref: 'pages/chatgpt-plus-guide.html',
 	},
 ];
@@ -81,9 +80,7 @@ const renderSubscriptionCard = (option) => {
 			<div class="mt-5 overflow-hidden rounded-2xl border ${theme.facts}">${facts}
 			</div>
 			<div class="mt-6 flex flex-col gap-3">
-				${option.maintenance
-					? '<span class="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-orange-200 bg-orange-50 px-5 py-2.5 text-sm font-bold text-orange-700" role="status" data-i18n="subscription.maintenance"></span>'
-					: `<a href="${option.primaryHref}" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center justify-center rounded-lg px-5 py-2.5 text-sm font-bold transition-all ${theme.primary}" data-i18n="actions.enterSystem"></a>`}
+				<a href="${option.primaryHref}" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center justify-center rounded-lg px-5 py-2.5 text-sm font-bold transition-all ${theme.primary}" data-i18n="actions.enterSystem"></a>
 				<a href="${option.secondaryHref}" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center justify-center rounded-lg border px-5 py-2.5 text-sm font-bold transition-all ${theme.secondary}" data-i18n="subscription.inSiteTutorial"></a>
 			</div>
 		</article>`;
