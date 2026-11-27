@@ -15,7 +15,7 @@
 
 ## 教程
 
-- /pages/chatgpt-plus-guide.html：OpenAI & Claude 代充系统教程
+- /pages/chatgpt-ios-guide.html：OpenAI & Claude 代充系统教程
 - /pages/gptplus-free-guide.html：ChatGPT 帐号充值系统教程
 - /pages/chatgpt-no-vpn-guide.html：ChatGPT 国内直连系统教程
 - /pages/muse2api-agent-guide.html：muse2api Agent 部署教程
