@@ -29,7 +29,7 @@ const subscriptionOptions = [
 			{ labelKey: 'subscription.factThreeSteps', valueKey: 'chatgpt.steps' },
 		],
 		primaryHref: 'https://ios.subcheap.free/',
-		secondaryHref: 'pages/chatgpt-plus-guide.html',
+		secondaryHref: 'pages/chatgpt-ios-guide.html',
 	},
 ];
 
